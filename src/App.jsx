@@ -1,27 +1,14 @@
-import { Suspense, useState } from "react";
-
+import React, { Suspense } from "react";
 import "./App.css";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import NotFound from "./pages/NotFound";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import AppRoutes from './routes';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-  <Router>
-   <Suspense fallback={<div>Loading...</div>}>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="*" element={<NotFound/>} />
-    </Routes>
-    </Suspense>
-  </Router>
-    
-  
+    <div className="App">
+      <Suspense fallback={<div>Loading...</div>}>
+        <AppRoutes />
+      </Suspense>
+    </div>
   );
 }
 
