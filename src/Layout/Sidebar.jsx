@@ -222,9 +222,7 @@ const allMenuList = [
     ),
     path: "/analytics",
     id: 4,
- 
   },
-
 
   {
     menuTitle: "Lost Leads",
@@ -287,7 +285,6 @@ const allMenuList = [
     path: "/setting",
     id: 5,
   },
-
 ];
 
 export const SidebarMain = ({ open, backdropClick }) => {
@@ -297,8 +294,6 @@ export const SidebarMain = ({ open, backdropClick }) => {
   const [collpasedToggle, setCollpasedToggle] = useState(false);
   const [expandedSubMenus, setExpandedSubMenus] = useState({});
   // const shouldCollapse = currentPath === '/chat-widget' || currentPath === '/web-chat' || currentPath === '/work-space' || currentPath === '/add-channel';
-
- 
 
   useEffect(() => {
     const path = window?.location?.pathname;
@@ -383,64 +378,65 @@ export const SidebarMain = ({ open, backdropClick }) => {
                 />
               </MenuItem>
               {menuList.map((val, index) => {
-  return (
-    <div key={index}> {/* Wrap in a div or React.Fragment */}
-      <MenuItem
-        active={val?.path === currentPath}
-        onClick={() =>
-          collpasedFn(val?.path, val?.id, !!val.subMenu)
-        }
-        component="div"
-        icon={val?.menuIcon}
-      >
-        {val?.menuTitle}
+                return (
+                  <div key={index}>
+                    {" "}
+                    {/* Wrap in a div or React.Fragment */}
+                    <MenuItem
+                      active={val?.path === currentPath}
+                      onClick={() =>
+                        collpasedFn(val?.path, val?.id, !!val.subMenu)
+                      }
+                      component="div"
+                      icon={val?.menuIcon}
+                    >
+                      {val?.menuTitle}
 
-        {val?.subMenu && val.subMenu.length > 0 && (
-          <svg
-            style={{ marginLeft: "5px" }}
-            version="1.1"
-            id="Layer_1"
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="15px"
-            height="15px"
-            viewBox="0 0 122.88 80.593"
-            enable-background="new 0 0 122.88 80.593"
-          >
-            <g>
-              <polygon points="122.88,0 122.88,30.82 61.44,80.593 0,30.82 0,0 61.44,49.772 122.88,0" />
-            </g>
-          </svg>
-        )}
-      </MenuItem>
-      <div
-        style={{
-          paddingLeft: "20px",
-          marginTop: "1px",
-          display: expandedSubMenus[val.id] ? "block" : "none", // Toggle visibility
-        }}
-      >
-        {val?.subMenu &&
-          val.subMenu.length > 0 &&
-          val?.subMenu.map((subItem, subIndex) => {
-            return (
-              <MenuItem
-                key={`${index}-${subIndex}`}
-                active={subItem?.path === currentPath}
-                component="div"
-                onClick={() => collpasedFn(subItem?.path)}
-                icon={subItem?.menuIcon}
-              >
-                {subItem?.menuTitle}
-              </MenuItem>
-            );
-          })}
-      </div>
-    </div>
-  );
-})}
-
+                      {val?.subMenu && val.subMenu.length > 0 && (
+                        <svg
+                          style={{ marginLeft: "5px" }}
+                          version="1.1"
+                          id="Layer_1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          x="0px"
+                          y="0px"
+                          width="15px"
+                          height="15px"
+                          viewBox="0 0 122.88 80.593"
+                          enable-background="new 0 0 122.88 80.593"
+                        >
+                          <g>
+                            <polygon points="122.88,0 122.88,30.82 61.44,80.593 0,30.82 0,0 61.44,49.772 122.88,0" />
+                          </g>
+                        </svg>
+                      )}
+                    </MenuItem>
+                    <div
+                      style={{
+                        paddingLeft: "20px",
+                        marginTop: "1px",
+                        display: expandedSubMenus[val.id] ? "block" : "none", // Toggle visibility
+                      }}
+                    >
+                      {val?.subMenu &&
+                        val.subMenu.length > 0 &&
+                        val?.subMenu.map((subItem, subIndex) => {
+                          return (
+                            <MenuItem
+                              key={`${index}-${subIndex}`}
+                              active={subItem?.path === currentPath}
+                              component="div"
+                              onClick={() => collpasedFn(subItem?.path)}
+                              icon={subItem?.menuIcon}
+                            >
+                              {subItem?.menuTitle}
+                            </MenuItem>
+                          );
+                        })}
+                    </div>
+                  </div>
+                );
+              })}
             </Menu>
           </div>
         </div>
