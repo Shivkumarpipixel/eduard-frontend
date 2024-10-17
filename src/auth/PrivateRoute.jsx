@@ -4,7 +4,7 @@ import { useAuth } from "./authProvider";
 
 const PrivateRoute = ({ element }) => {
   const { user } = useAuth(); //Authentication user
-  return user ? element : <Navigate to="/login" replace />;
+  return user ? element : <Navigate to="/home" replace />;
 };
 
 export default PrivateRoute;
