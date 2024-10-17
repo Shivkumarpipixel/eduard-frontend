@@ -1,5 +1,5 @@
 import React from "react";
-// import Header from "./Header";
+import Header from "./Header";
 // import Footer from "./Footer";
 import { SidebarMain } from "./Sidebar";
 
@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
                     currentPath === '/chat-widget' || currentPath === '/web-chat' ? null :
                         <Header siderBarFn={siderBarFn} />
                 } */}
-                {/* <Header siderBarFn={siderBarFn} /> */}
+                <Header siderBarFn={siderBarFn} />
                 {children}
             </div>
         </>

@@ -24,11 +24,11 @@
                 }
 
                 .ps-menuitem-root {
-                    &.logo_wrap {
-                        .ps-menu-button:hover {
-                            background: unset;
-                        }
-                    }
+                    // &.logo_wrap {
+                    //     .ps-menu-button:hover {
+                    //         background: unset;
+                    //     }
+                    // }
 
                     &+.ps-menuitem-root {
                         margin-top: 10px;
@@ -48,7 +48,7 @@
                             .ps-menu-icon {
                                 svg {
                                     path {
-                                        fill: #161E32;
+                                        fill: #f8cfcf;
                                     }
                                 }
                             }
@@ -118,7 +118,7 @@
     position: absolute;
     right: 1px;
     top: 15px;
-    background-color: #26C5FD;
+    background-color: #f86d6d;
     width: 30px;
     height: 30px;
     padding: 5px;

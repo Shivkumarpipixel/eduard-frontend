@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import HomeBanner from "../assets/home.svg";
-import { Carousel } from "react-responsive-carousel";
-
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useTheme } from "@mui/material/styles";
 import NextImage from "../assets/Next.svg";
 import PrevImage from "../assets/back.svg";
 
-import { MobileStepper } from "@mui/material";
-import Button from "@mui/material/Button";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
