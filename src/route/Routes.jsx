@@ -1,18 +1,27 @@
 import { lazy } from "react";
 import Home from "../pages/Home";
-// import Login from "../pages/Login";
+import Login from "../pages/Login";
 import LiveChat from "../pages/LiveChat";
 import Script from "../pages/Script";
-import Analytics from "../pages/Analytics"
-import LostLeads from "../pages/LostLeads"
-import ConnectChannels from "../pages/ConnectChannels"
-import Setting from "../pages/Setting"
+import Analytics from "../pages/Analytics";
+import LostLeads from "../pages/LostLeads";
+import ConnectChannels from "../pages/ConnectChannels";
+import Setting from "../pages/Setting";
 
 export const routes = [
   {
     path: "/",
     element: Home,
     isPrivate: true,
+    exact: true,
+    viewLabel: true,
+    isView: true,
+    // roles:['admin','owner','member']
+  },
+  {
+    path: "/login",
+    element: Login,
+    isPrivate: false,
     exact: true,
     viewLabel: true,
     isView: true,

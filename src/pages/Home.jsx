@@ -1,102 +1,111 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import HomeBanner from "../assets/home.svg";
-// import { Card } from '@/components/ui/card';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTheme } from "@mui/material/styles";
+import NextImage from "../assets/Next.svg";
+import PrevImage from "../assets/back.svg";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 
 const Home = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const theme = useTheme();
 
-  const pages = [
+  const slides = [
     {
-      title: "Welcome To Setter With AI",
-      subtitle: "Let's Explore And Start Our Journey!",
-      heading: "Let's get Started!",
-      description: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took."
-    },
-    {
-      title: "Live Chat",
-      description: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took."
+      title: "Let’s get Started!.",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+      videoSrc:
+        "https://your-support.s3.eu-west-3.amazonaws.com/3d_getting_started_2.mp4",
     },
     {
       title: "Scripts",
-      description: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took."
-    }
+
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+      videoSrc: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
+    },
+    {
+      title: "Live Chat",
+
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+      videoSrc: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
+    },
   ];
 
-  const handleNext = () => {
-    setCurrentPage(prev => Math.min(prev + 1, pages.length - 1));
+  const handlePrev = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? slides.length - 1 : prevSlide - 1
+    );
   };
 
-  const handlePrev = () => {
-    setCurrentPage(prev => Math.max(prev - 1, 0));
+  const handleNext = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === slides.length - 1 ? 0 : prevSlide + 1
+    );
   };
 
   return (
-    <div className="bg-gray-50 p-4">
-      <div className="max-w-full p-6 mx-auto">
-        {currentPage === 0 && (
-          <div className="bg-[#FFF5E9] rounded-lg p-6 mb-6">
-            <h1 className="text-2xl font-semibold text-gray-800">{pages[0].title}</h1>
-            <p className="text-gray-600 mt-1">{pages[0].subtitle}</p>
-          </div>
-        )}
+    <div className="relative w-full h-screen bg-[#E5E5E5] p-20">
+      {/* Banner */}
+      <div className="w-full ">
+        <img className="w-[1024px]" src={HomeBanner} alt="Home Banner" />
+      </div>
 
-        <div className="relative h-screen-full">
-          <div className="bg-white shadow-sm">
-            <div className="p-6">
-              <h2 className={`text-xl font-semibold ${currentPage === 0 ? 'text-orange-400' : 'text-gray-800'}`}>
-                {currentPage === 0 ? pages[0].heading : pages[currentPage].title}
-              </h2>
-              <p className="text-gray-600 text-sm mt-2">
-                {pages[currentPage].description}
-              </p>
+      {/* Card Section */}
+      <div className="relative mt-16 rounded-xl bg-white flex flex-col space-y-2 w-[720px] h-[620px] p-8 mx-10">
+        <h2
+          className={`text-4xl font-semibold mb-4 ${
+            currentSlide === 1 || currentSlide == 2
+              ? "text-black"
+              : "text-[#F1BD6C]"
+          } `}
+        >
+          {slides[currentSlide].title}
+        </h2>
+        <p className="text-md text-slate-400">
+          {slides[currentSlide].description}
+        </p>
 
-              <div className="relative mt-6 rounded-lg bg-gray-100 w-full h-full flex items-center justify-center">
-                <div className="absolute top-4 left-4">
-                  <img src="/api/placeholder/24/24" alt="Setter With AI" className="h-6" />
-                </div>
-                
-                <div className="w-12 h-12 rounded-full bg-orange-300 flex items-center justify-center">
-                  <div className="w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-white border-b-8 border-b-transparent ml-1"></div>
-                </div>
-                
-                <div className="absolute bottom-4 left-4 flex gap-2">
-                  <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                  <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-                </div>
-                
-                <div className="absolute bottom-4 right-4 flex items-center gap-2">
-                  <span className="text-sm text-gray-600">0:12</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Overlay Navigation Arrows */}
-          <div className="absolute inset-y-0 left-10 right-0 flex items-center justify-between pointer-events-none">
-            <div className="pointer-events-auto">
-              {currentPage > 0 && (
-                <button
-                  onClick={handlePrev}
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-lg -ml-5 hover:bg-gray-50"
-                >
-                  <ChevronLeft className="w-6 h-6 text-gray-600" />
-                </button>
-              )}
-            </div>
-            
-            <div className="pointer-events-auto">
-              {currentPage < pages.length - 1 && (
-                <button
-                  onClick={handleNext}
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-lg -mr-5 hover:bg-gray-50"
-                >
-                  <ChevronRight className="w-6 h-6 text-gray-600" />
-                </button>
-              )}
-            </div>
-          </div>
+        {/* Video Section */}
+        <div className="video_section mb-4">
+          <video
+            width="100%"
+            height="100%"
+            className="max-w-[900px] max-h-[400px]"
+            controls
+            poster="https://train.yoursupport.ai/img/rating-thumb.jpg"
+          >
+            <source src={slides[currentSlide].videoSrc} type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
         </div>
+      </div>
+
+      {/* Buttons: Positioned outside the card */}
+      <div className="absolute top-1/2 left-12 transform -translate-y-1/2">
+        {/* Previous Button: Only show if not on the first slide */}
+        {currentSlide > 0 && (
+          <button
+            onClick={handlePrev}
+            className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full"
+          >
+            <KeyboardArrowLeft />
+          </button>
+        )}
+      </div>
+
+      <div className="absolute top-1/2 right-48 transform -translate-y-1/2">
+        {/* Next Button */}
+        {currentSlide < slides.length - 1 && (
+          <button
+            onClick={handleNext}
+            className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full"
+          >
+            <KeyboardArrowRight />
+          </button>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,9 @@
 import React from "react";
-import PinkImage from "../assets/pink.svg";
+import BlueImage from "../assets/blue.svg";
+import RedImage from "../assets/red.svg";
+import GreenImage from "../assets/green.svg";
+import YellowImage from "../assets/yellow.svg";
+import ScriptImage from "../assets/script.svg";
 
 const Script = () => {
   const scripts = [
@@ -7,36 +11,39 @@ const Script = () => {
       title: "Lorem Ipsum",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      image: PinkImage,
+      image: RedImage,
     },
     {
       title: "Lorem Ipsum",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      image: PinkImage,
+      image: YellowImage,
     },
     {
       title: "Lorem Ipsum",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      image: PinkImage,
+      image: GreenImage,
     },
     {
       title: "Lorem Ipsum",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       color: "bg-blue-200",
-      image: PinkImage,
+      image: BlueImage,
     },
   ];
 
   return (
     <div className="p-6 bg-gray-100 h-full">
-      <div className="bg-red-100 rounded-lg shadow-md p-4 mb-6">
-        <h1 className="text-3xl font-bold mb-2">Scripts</h1>
-        <p className="text-gray-600">
-          Lorem Ipsum Is Simply Dummy Text Of The Printing
-        </p>
+      <div className="relative w-full py-5">
+        <img className="w-full h-full" src={ScriptImage} alt="Home Banner" />
+        <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black ">
+          <h1 className="text-5xl font-semibold ">Connect Channels</h1>
+          <p className="text-slate-400 font-semibold">
+            Lorem Ipsum is simply dummy text of the printing.
+          </p>
+        </div>
       </div>
       <div className="bg-white p-6 rounded-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -61,9 +68,11 @@ const Script = () => {
                   <p className="text-sm text-gray-600 mb-4">
                     {script.description}
                   </p>
-                  <button className="bg-white text-blue-500 border border-blue-500 px-4 py-1 rounded text-sm hover:bg-blue-50 transition-colors">
-                    Activate
-                  </button>
+                  <div className="flex justify-end">
+                    <button className="bg-white text-black border border-black px-4 py-1 rounded text-sm hover:bg-blue-50 transition-colors">
+                      Connect
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
