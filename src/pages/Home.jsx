@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import HomeBanner from "../assets/home.svg";
 import { useTheme } from "@mui/material/styles";
-import NextImage from "../assets/Next.svg";
-import PrevImage from "../assets/back.svg";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 
@@ -47,16 +45,16 @@ const Home = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-[#E5E5E5] p-20">
+    <div className="relative w-full h-full bg-gray-100 p-10">
       {/* Banner */}
-      <div className="w-full ">
+      <div className="w-full ml-16 ">
         <img className="w-[1024px]" src={HomeBanner} alt="Home Banner" />
       </div>
 
       {/* Card Section */}
-      <div className="relative mt-16 rounded-xl bg-white flex flex-col space-y-2 w-[720px] h-[620px] p-8 mx-10">
+      <div className="relative mt-10 rounded-xl bg-white flex flex-col space-y-2 w-[700px] h-[550px] p-6 mx-20">
         <h2
-          className={`text-4xl font-semibold mb-4 ${
+          className={`text-4xl font-semibold ${
             currentSlide === 1 || currentSlide == 2
               ? "text-black"
               : "text-[#F1BD6C]"
@@ -69,7 +67,7 @@ const Home = () => {
         </p>
 
         {/* Video Section */}
-        <div className="video_section mb-4">
+        <div className="video_section">
           <video
             width="100%"
             height="100%"
