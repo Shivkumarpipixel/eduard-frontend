@@ -234,6 +234,7 @@ export const SidebarMain = ({ open, backdropClick }) => {
         collpasedToggle ? "sidebar_main h-screen active" : "sidebar_main"
       }
     >
+      {/* Sidebar */}
       <Sidebar
         collapsed={collpasedToggle}
         toggled={open}
@@ -247,9 +248,12 @@ export const SidebarMain = ({ open, backdropClick }) => {
             className="sidebar_inner"
             style={{ flex: 1, marginBottom: "16px" }}
           >
-            <div className="w-full ">
+            {/* Logo */}
+            <div className="w-full">
               <img className="h-30" src={logo} alt="Home Banner" />
             </div>
+
+            {/* Menu */}
             <Menu>
               <MenuItem onClick={handleLogoClick} className="logo_wrap">
                 <img
@@ -257,74 +261,72 @@ export const SidebarMain = ({ open, backdropClick }) => {
                   alt=""
                 />
               </MenuItem>
-              {menuList.map((val, index) => {
-                return (
-                  <div key={index}>
-                    {" "}
-                    {/* Wrap in a div or React.Fragment */}
-                    <MenuItem
-                      active={val?.path === currentPath}
-                      onClick={() =>
-                        collpasedFn(val?.path, val?.id, !!val.subMenu)
-                      }
-                      component="div"
-                      icon={val?.menuIcon}
-                    >
-                      {val?.menuTitle}
 
-                      {val?.subMenu && val.subMenu.length > 0 && (
-                        <svg
-                          style={{ marginLeft: "5px" }}
-                          version="1.1"
-                          id="Layer_1"
-                          xmlns="http://www.w3.org/2000/svg"
-                          x="0px"
-                          y="0px"
-                          width="15px"
-                          height="15px"
-                          viewBox="0 0 122.88 80.593"
-                          enable-background="new 0 0 122.88 80.593"
+              {menuList.map((val, index) => (
+                <div key={index}>
+                  <MenuItem
+                    active={val?.path === currentPath}
+                    onClick={() =>
+                      collpasedFn(val?.path, val?.id, !!val.subMenu)
+                    }
+                    component="div"
+                    icon={val?.menuIcon}
+                  >
+                    {val?.menuTitle}
+
+                    {val?.subMenu && val.subMenu.length > 0 && (
+                      <svg
+                        style={{ marginLeft: "5px" }}
+                        version="1.1"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="15px"
+                        height="15px"
+                        viewBox="0 0 122.88 80.593"
+                        enable-background="new 0 0 122.88 80.593"
+                      >
+                        <g>
+                          <polygon points="122.88,0 122.88,30.82 61.44,80.593 0,30.82 0,0 61.44,49.772 122.88,0" />
+                        </g>
+                      </svg>
+                    )}
+                  </MenuItem>
+
+                  {/* Submenu */}
+                  <div
+                    style={{
+                      paddingLeft: "20px",
+                      marginTop: "1px",
+                      display: expandedSubMenus[val.id] ? "block" : "none",
+                    }}
+                  >
+                    {val?.subMenu &&
+                      val.subMenu.length > 0 &&
+                      val?.subMenu.map((subItem, subIndex) => (
+                        <MenuItem
+                          key={`${index}-${subIndex}`}
+                          active={subItem?.path === currentPath}
+                          component="div"
+                          onClick={() => collpasedFn(subItem?.path)}
+                          icon={subItem?.menuIcon}
                         >
-                          <g>
-                            <polygon points="122.88,0 122.88,30.82 61.44,80.593 0,30.82 0,0 61.44,49.772 122.88,0" />
-                          </g>
-                        </svg>
-                      )}
-                    </MenuItem>
-                    <div
-                      style={{
-                        paddingLeft: "20px",
-                        marginTop: "1px",
-                        display: expandedSubMenus[val.id] ? "block" : "none",
-                      }}
-                    >
-                      {val?.subMenu &&
-                        val.subMenu.length > 0 &&
-                        val?.subMenu.map((subItem, subIndex) => {
-                          return (
-                            <MenuItem
-                              key={`${index}-${subIndex}`}
-                              active={subItem?.path === currentPath}
-                              component="div"
-                              onClick={() => collpasedFn(subItem?.path)}
-                              icon={subItem?.menuIcon}
-                            >
-                              {subItem?.menuTitle}
-                            </MenuItem>
-                          );
-                        })}
-                    </div>
+                          {subItem?.menuTitle}
+                        </MenuItem>
+                      ))}
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </Menu>
           </div>
         </div>
       </Sidebar>
 
+      {/* Toggle button (hidden on larger screens) */}
       <div
         variant="primary"
-        className="arrow_btn"
+        className="arrow_btn lg:hidden"
         onClick={() => setCollpasedToggle(!collpasedToggle)}
       >
         <svg
@@ -339,21 +341,18 @@ export const SidebarMain = ({ open, backdropClick }) => {
           xmlSpace="preserve"
           stroke="#fca5a5"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g
             id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></g>
           <g id="SVGRepo_iconCarrier">
-            {" "}
             <g>
-              {" "}
               <g>
-                {" "}
-                <path d="M168.837,256L388.418,36.418c8.331-8.331,8.331-21.839,0-30.17c-8.331-8.331-21.839-8.331-30.17,0L123.582,240.915 c-8.331,8.331-8.331,21.839,0,30.17l234.667,234.667c8.331,8.331,21.839,8.331,30.17,0c8.331-8.331,8.331-21.839,0-30.17 L168.837,256z"></path>{" "}
-              </g>{" "}
-            </g>{" "}
+                <path d="M168.837,256L388.418,36.418c8.331-8.331,8.331-21.839,0-30.17c-8.331-8.331-21.839-8.331-30.17,0L123.582,240.915 c-8.331,8.331-8.331,21.839,0,30.17l234.667,234.667c8.331,8.331,21.839,8.331,30.17,0c8.331-8.331,8.331-21.839,0-30.17 L168.837,256z"></path>
+              </g>
+            </g>
           </g>
         </svg>
       </div>

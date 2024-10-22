@@ -7,6 +7,7 @@ import Analytics from "../pages/Analytics";
 import LostLeads from "../pages/LostLeads";
 import ConnectChannels from "../pages/ConnectChannels";
 import Setting from "../pages/Setting";
+import Register from "../pages/Register";
 
 export const routes = [
   {
@@ -19,7 +20,25 @@ export const routes = [
     // roles:['admin','owner','member']
   },
   {
+    path: "/register",
+    element: Register,
+    isPrivate: false,
+    exact: true,
+    viewLabel: true,
+    isView: true,
+    // roles:['admin','owner','member']
+  },
+  {
     path: "/login",
+    element: Login,
+    isPrivate: false,
+    exact: true,
+    viewLabel: true,
+    isView: true,
+    // roles:['admin','owner','member']
+  },
+  {
+    path: "/register",
     element: Login,
     isPrivate: false,
     exact: true,

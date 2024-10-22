@@ -35,16 +35,17 @@ const Script = () => {
   ];
 
   return (
-    <div className="p-6 bg-gray-100 h-full">
-      <div className="relative w-full py-5">
-        <img className="w-full h-full" src={ScriptImage} alt="Home Banner" />
-        <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black ">
-          <h1 className="text-5xl font-semibold ">Connect Channels</h1>
+    <div className="p-6 bg-gray-100 space-y-6 h-full">
+      <div className="relative  ">
+        <img className="w-full h-52" src={ScriptImage} alt="Home Banner" />
+        <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black">
+          <h1 className="text-5xl font-semibold">Connect Channels</h1>
           <p className="text-slate-400 font-semibold">
-            Lorem Ipsum is simply dummy text of the printing.
+            Lorem Ipsum is simply dummy text of the printing.
           </p>
         </div>
       </div>
+
       <div className="bg-white p-6 rounded-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {scripts.map((script, index) => (
