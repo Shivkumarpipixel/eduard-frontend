@@ -9,6 +9,7 @@ import ConnectChannels from "../pages/ConnectChannels";
 import Setting from "../pages/Setting";
 import Register from "../pages/Register";
 import EmailPassword from "../pages/submenu/EmailPassword";
+import Billing from "../pages/Billing";
 
 export const routes = [
   {
@@ -122,6 +123,14 @@ export const routes = [
   {
     path: "/setting/email-password",
     element: EmailPassword,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    // roles: ["all"],
+  },
+  {
+    path: "/setting/plan-billing",
+    element: Billing,
     isPrivate: true,
     exact: true,
     isView: true,

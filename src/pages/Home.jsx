@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomeBanner from "../assets/home.svg";
 import { useTheme } from "@mui/material/styles";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -43,6 +43,46 @@ const Home = () => {
       prevSlide === slides.length - 1 ? 0 : prevSlide + 1
     );
   };
+
+  useEffect(() => {
+    // fetchUserData();
+    // setActive(parseInt(user?.panel_step));
+    let sso = localStorage.getItem("sso");
+    if (sso !== "true") callSSOAPI();
+    //  ? callSSOAPI() : console.log("api already called");
+  }, []); // Empty dependency array to run only once on component mount
+
+  async function callSSOAPI() {
+    try {
+      // Retrieve user_id from the cookie
+      let user_id = localStorage.getItem("userId");
+      // Make POST request to /dashboard/sso API
+      const response = await fetch(`${api_url}/auth/sso`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_id: user_id }),
+      });
+
+      // Handle API response
+      const response2 = await response.json();
+      const responseData = response2.data;
+      if (responseData === "error") {
+        // If response is 'error', show an alert
+      } else if (responseData.startsWith("https://")) {
+        // If response is a URL, open it in a new tab
+        openURLInNewTab(responseData);
+        localStorage.setItem("sso", "true");
+      } else {
+        // Unexpected response
+        console.error("Unexpected response:", responseData);
+      }
+    } catch (error) {
+      console.error("error:", error);
+      // Handle error as needed
+    }
+  }
 
   return (
     <div className="relative w-full h-full bg-gray-100 p-10">

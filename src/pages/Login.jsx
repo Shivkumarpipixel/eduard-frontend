@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LoginImage from "../assets/login.png";
-import LogoImage from "../assets/logo.png";
+import LogoImage from "../assets/AutomationzLogo.png";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
@@ -75,7 +75,7 @@ const Login = () => {
           <div className="bg-white rounded-lg shadow-lg flex justify-center items-center flex-col w-[1042px] h-[752px] p-8">
             <img src={LogoImage} alt="Logo" />
             <h2 className="text-2xl font-bold mb-4">Welcome</h2>
-            <p className="text-gray-400 text-lg">Login to setter with AI</p>
+            <p className="text-gray-400 text-lg">Login to Automationz</p>
 
             <form
               onSubmit={handleSubmit(onSubmit)}
