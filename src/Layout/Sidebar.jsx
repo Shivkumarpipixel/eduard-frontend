@@ -145,22 +145,17 @@ const allMenuList = [
   },
   {
     menuTitle: "Setting",
-    menuIcon: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          className="icon"
-          d="M10.1351 21L9.77306 18.108C9.45372 18.0113 9.10872 17.86 8.73806 17.654C8.36672 17.4473 8.05106 17.226 7.79106 16.99L5.12306 18.125L3.25806 14.875L5.56406 13.136C5.53406 12.956 5.50972 12.77 5.49106 12.578C5.47106 12.386 5.46106 12.1997 5.46106 12.019C5.46106 11.851 5.47106 11.6743 5.49106 11.489C5.50972 11.3037 5.53406 11.095 5.56406 10.863L3.25806 9.126L5.12306 5.914L7.77106 7.03C8.06972 6.78133 8.39306 6.557 8.74106 6.357C9.08772 6.157 9.42539 6.00233 9.75406 5.893L10.1341 3H13.8661L14.2271 5.912C14.6104 6.04667 14.9491 6.201 15.2431 6.375C15.5371 6.549 15.8401 6.767 16.1521 7.029L18.8771 5.914L20.7421 9.125L18.3601 10.921C18.4147 11.1277 18.4454 11.3173 18.4521 11.49C18.4587 11.6627 18.4621 11.8327 18.4621 12C18.4621 12.1553 18.4554 12.319 18.4421 12.491C18.4294 12.6637 18.4001 12.8723 18.3541 13.117L20.6981 14.875L18.8331 18.125L16.1521 16.971C15.8407 17.233 15.5274 17.4573 15.2121 17.644C14.8967 17.8307 14.5684 17.979 14.2271 18.089L13.8661 21H10.1351ZM11.0001 20H12.9561L13.3251 17.292C13.8291 17.1587 14.2824 16.9757 14.6851 16.743C15.0891 16.5103 15.4997 16.1917 15.9171 15.787L18.4121 16.85L19.4061 15.15L17.2171 13.506C17.3004 13.2213 17.3557 12.9593 17.3831 12.72C17.4097 12.4813 17.4231 12.2413 17.4231 12C17.4231 11.7467 17.4097 11.5067 17.3831 11.28C17.3564 11.0533 17.3011 10.8043 17.2171 10.533L19.4441 8.85L18.4501 7.15L15.8981 8.22C15.5954 7.88733 15.1977 7.57567 14.7051 7.285C14.2117 6.995 13.7451 6.80267 13.3051 6.708L13.0001 4H11.0061L10.6941 6.689C10.1901 6.79633 9.72672 6.96967 9.30406 7.209C8.88206 7.44767 8.46206 7.776 8.04406 8.194L5.55006 7.15L4.55606 8.85L6.72506 10.47C6.64172 10.694 6.58339 10.9373 6.55006 11.2C6.51672 11.4627 6.50006 11.736 6.50006 12C6.50006 12.2733 6.51672 12.525 6.55006 12.775C6.58339 13.025 6.63539 13.2683 6.70606 13.505L4.55606 15.15L5.55006 16.85L8.02506 15.8C8.41772 16.196 8.82506 16.5137 9.24706 16.753C9.66972 16.9923 10.1457 17.1787 10.6751 17.312L11.0001 20ZM11.9731 14.5C12.6704 14.5 13.2614 14.2577 13.7461 13.773C14.2307 13.2883 14.4731 12.6973 14.4731 12C14.4731 11.3027 14.2307 10.7117 13.7461 10.227C13.2614 9.74233 12.6704 9.5 11.9731 9.5C11.2717 9.5 10.6797 9.74233 10.1971 10.227C9.71439 10.7117 9.47306 11.3027 9.47306 12C9.47306 12.6973 9.71439 13.2883 10.1971 13.773C10.6797 14.2577 11.2717 14.5 11.9731 14.5Z"
-        />
-      </svg>
-    ),
     path: "/setting",
     id: 5,
+    subMenu: [
+      { menuTitle: "Add Teammates", path: "/setting/add-teammates", id: "5-1" },
+      {
+        menuTitle: "Email/Password",
+        path: "/setting/email-password",
+        id: "5-2",
+      },
+      { menuTitle: "Plan & Billing", path: "/setting/plan-billing", id: "5-3" },
+    ],
   },
 ];
 
@@ -168,54 +163,28 @@ export const SidebarMain = ({ open, backdropClick }) => {
   const [menuList, setMenuList] = useState(allMenuList);
   let navigate = useNavigate();
   const currentPath = window?.location?.pathname;
-  const [collpasedToggle, setCollpasedToggle] = useState(false);
+  const [collapsedToggle, setCollapsedToggle] = useState(false);
+  const [collapsePaths, setCollapsePaths] = useState([]);
+
   const [expandedSubMenus, setExpandedSubMenus] = useState({});
-  // const shouldCollapse = currentPath === '/chat-widget' || currentPath === '/web-chat' || currentPath === '/work-space' || currentPath === '/add-channel';
 
   useEffect(() => {
     const path = window?.location?.pathname;
-    if (
-      path === "/chat-widget" ||
-      path === "/web-chat/chat" ||
-      path === "/advance/flow" ||
-      path === "/advance/automation" ||
-      path === "/advance/content" ||
-      path === "/advance/tools" ||
-      path === "/web-chat/overview"
-    ) {
-      console.log("Inside useEffects if condition");
-      setCollpasedToggle(true);
-      setExpandedSubMenus(false);
-    } else {
-      setCollpasedToggle(false);
-    }
-  }, []);
+    setCollapsedToggle(collapsePaths.includes(path));
+    setExpandedSubMenus(false);
+  }, [currentPath]);
 
-  const collpasedFn = (path, id, hasSubMenu) => {
-    // Toggle submenu if it exists
+  const handleMenuClick = (path, id, hasSubMenu) => {
     if (hasSubMenu) {
       setExpandedSubMenus((prevState) => ({
         ...prevState,
-        [id]: !prevState[id], // Toggle the specific submenu
+        [id]: !prevState[id], // Toggle specific submenu
       }));
-      setCollpasedToggle(false);
+      setCollapsedToggle(false);
+      navigate(path);
     } else {
-      if (
-        path === "/chat-widget" ||
-        path === "/web-chat/chat" ||
-        path === "/advance/flow" ||
-        path === "/advance/automation" ||
-        path === "/advance/content" ||
-        path === "/advance/tools" ||
-        path === "/web-chat/overview"
-      ) {
-        setCollpasedToggle(true);
-        setExpandedSubMenus(false);
-      } else {
-        setCollpasedToggle(false);
-      }
-
-      // If no submenu, perform navigation and sidebar collapse logic
+      setCollapsedToggle(collapsePaths.includes(path));
+      setExpandedSubMenus(false);
       navigate(path);
     }
   };
@@ -224,24 +193,20 @@ export const SidebarMain = ({ open, backdropClick }) => {
     navigate("/");
   };
 
-  const filterMenuListByIds = (ids) => {
-    return menuList.filter((item) => ids.includes(item.id));
-  };
-
   return (
     <div
       className={
-        collpasedToggle ? "sidebar_main h-screen active" : "sidebar_main"
+        collapsedToggle ? "sidebar_main h-screen active" : "sidebar_main"
       }
     >
       {/* Sidebar */}
       <Sidebar
-        collapsed={collpasedToggle}
+        collapsed={collapsedToggle}
         toggled={open}
         onBackdropClick={backdropClick}
         rtl={false}
         customBreakPoint="1199px"
-        className={collpasedToggle ? "active" : ""}
+        className={collapsedToggle ? "active" : ""}
       >
         <div className="sidebar_wrap">
           <div
@@ -257,65 +222,55 @@ export const SidebarMain = ({ open, backdropClick }) => {
             <Menu>
               <MenuItem onClick={handleLogoClick} className="logo_wrap">
                 <img
-                  src={collpasedToggle ? "/only_logo.png" : "/blue_logo.png"}
+                  src={collapsedToggle ? "/only_logo.png" : "/blue_logo.png"}
                   alt=""
                 />
               </MenuItem>
 
-              {menuList.map((val, index) => (
+              {menuList.map((menu, index) => (
                 <div key={index}>
                   <MenuItem
-                    active={val?.path === currentPath}
+                    active={menu?.path === currentPath}
                     onClick={() =>
-                      collpasedFn(val?.path, val?.id, !!val.subMenu)
+                      handleMenuClick(menu?.path, menu?.id, !!menu.subMenu)
                     }
-                    component="div"
-                    icon={val?.menuIcon}
+                    icon={menu?.menuIcon}
                   >
-                    {val?.menuTitle}
+                    {menu?.menuTitle}
 
-                    {val?.subMenu && val.subMenu.length > 0 && (
+                    {menu?.subMenu && (
                       <svg
                         style={{ marginLeft: "5px" }}
-                        version="1.1"
-                        id="Layer_1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        x="0px"
-                        y="0px"
-                        width="15px"
-                        height="15px"
+                        width="15"
+                        height="15"
                         viewBox="0 0 122.88 80.593"
-                        enable-background="new 0 0 122.88 80.593"
                       >
-                        <g>
-                          <polygon points="122.88,0 122.88,30.82 61.44,80.593 0,30.82 0,0 61.44,49.772 122.88,0" />
-                        </g>
+                        <polygon points="122.88,0 122.88,30.82 61.44,80.593 0,30.82 0,0 61.44,49.772 122.88,0" />
                       </svg>
                     )}
                   </MenuItem>
 
-                  {/* Submenu */}
-                  <div
-                    style={{
-                      paddingLeft: "20px",
-                      marginTop: "1px",
-                      display: expandedSubMenus[val.id] ? "block" : "none",
-                    }}
-                  >
-                    {val?.subMenu &&
-                      val.subMenu.length > 0 &&
-                      val?.subMenu.map((subItem, subIndex) => (
+                  {menu?.subMenu && (
+                    <div
+                      style={{
+                        paddingLeft: "20px",
+                        display: expandedSubMenus[menu.id] ? "block" : "none",
+                      }}
+                    >
+                      {menu?.subMenu.map((subItem, subIndex) => (
                         <MenuItem
                           key={`${index}-${subIndex}`}
                           active={subItem?.path === currentPath}
-                          component="div"
-                          onClick={() => collpasedFn(subItem?.path)}
+                          onClick={() =>
+                            handleMenuClick(subItem?.path, subItem?.id)
+                          }
                           icon={subItem?.menuIcon}
                         >
                           {subItem?.menuTitle}
                         </MenuItem>
                       ))}
-                  </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </Menu>
@@ -325,35 +280,11 @@ export const SidebarMain = ({ open, backdropClick }) => {
 
       {/* Toggle button (hidden on larger screens) */}
       <div
-        variant="primary"
-        className="arrow_btn lg:hidden"
-        onClick={() => setCollpasedToggle(!collpasedToggle)}
+        className="arrow_btn lg:hidden bg-red-500"
+        onClick={() => setCollapsedToggle(!collapsedToggle)}
       >
-        <svg
-          fill="#fca5a5"
-          height="16px"
-          width="16px"
-          version="1.1"
-          id="Layer_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          viewBox="0 0 512 512"
-          xmlSpace="preserve"
-          stroke="#fca5a5"
-        >
-          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></g>
-          <g id="SVGRepo_iconCarrier">
-            <g>
-              <g>
-                <path d="M168.837,256L388.418,36.418c8.331-8.331,8.331-21.839,0-30.17c-8.331-8.331-21.839-8.331-30.17,0L123.582,240.915 c-8.331,8.331-8.331,21.839,0,30.17l234.667,234.667c8.331,8.331,21.839,8.331,30.17,0c8.331-8.331,8.331-21.839,0-30.17 L168.837,256z"></path>
-              </g>
-            </g>
-          </g>
+        <svg fill="#fca5a5" height="16" width="16" viewBox="0 0 512 512">
+          {/* Arrow SVG Path */}
         </svg>
       </div>
     </div>

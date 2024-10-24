@@ -8,6 +8,7 @@ import LostLeads from "../pages/LostLeads";
 import ConnectChannels from "../pages/ConnectChannels";
 import Setting from "../pages/Setting";
 import Register from "../pages/Register";
+import EmailPassword from "../pages/submenu/EmailPassword";
 
 export const routes = [
   {
@@ -89,6 +90,38 @@ export const routes = [
   {
     path: "/setting",
     element: Setting,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    // children: [
+    //   {
+    //     path: "add-teamates",
+    //     element: AddTeamates, // The component to render for this submenu
+    //     isPrivate: true,
+    //     exact: true,
+    //     isView: true,
+    //   },
+    //   {
+    //     path: "email-password",
+    //     element: EmailPassword, // The component to render for this submenu
+    //     isPrivate: true,
+    //     exact: true,
+    //     isView: true,
+    //   },
+    //   {
+    //     path: "plan-billing",
+    //     element: PlanBilling, // The component to render for this submenu
+    //     isPrivate: true,
+    //     exact: true,
+    //     isView: true,
+    //   },
+    // ],
+    // roles: ["all"],
+  },
+  // submenu routes
+  {
+    path: "/setting/email-password",
+    element: EmailPassword,
     isPrivate: true,
     exact: true,
     isView: true,

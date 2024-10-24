@@ -39,7 +39,7 @@ const Script = () => {
       <div className="relative  ">
         <img className="w-full h-52" src={ScriptImage} alt="Home Banner" />
         <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black">
-          <h1 className="text-5xl font-semibold">Connect Channels</h1>
+          <h1 className="text-5xl font-semibold">Script</h1>
           <p className="text-slate-400 font-semibold">
             Lorem Ipsum is simply dummy text of the printing.
           </p>

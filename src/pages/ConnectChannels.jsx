@@ -1,8 +1,9 @@
 import React from "react";
 import NoProfileImage from "../assets/login.png";
-import WhatsAppImage from "../assets/whatsapp.svg"
-import FacebookImage from "../assets/facebook.svg"
-import InstagramImage from "../assets/instagram.svg"
+import WhatsAppImage from "../assets/whatsapp.svg";
+import FacebookImage from "../assets/facebook.svg";
+import InstagramImage from "../assets/instagram.svg";
+import ChannelImage from "../assets/channels.svg";
 
 const ConnectChannels = () => {
   const channels = [
@@ -27,12 +28,15 @@ const ConnectChannels = () => {
   ];
 
   return (
-    <div className="p-6 bg-gray-100 h-full">
-      <div className="bg-red-100 rounded-lg shadow-md p-4 mb-6">
-        <h1 className="text-3xl font-bold mb-2">Connect Channels</h1>
-        <p className="text-gray-600">
-          Lorem Ipsum Is Simply Dummy Text Of The Printing
-        </p>
+    <div className="p-6 bg-gray-100 space-y-6 h-full">
+      <div className="relative  ">
+        <img className="w-full h-52" src={ChannelImage} alt="Home Banner" />
+        <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black">
+          <h1 className="text-5xl font-semibold">Connect Channels</h1>
+          <p className="text-slate-400 font-semibold">
+            Lorem Ipsum is simply dummy text of the printing.
+          </p>
+        </div>
       </div>
       <div className="bg-white p-6 rounded-xl">
         <div className="grid grid-cols-3 md:grid-cols-2 gap-6">
@@ -51,11 +55,10 @@ const ConnectChannels = () => {
                     {channel.description}
                   </p>
                   <div className="flex justify-end">
-                  <button className="bg-white text-black border border-black px-4 py-1 rounded text-sm hover:bg-blue-50 transition-colors">
-                    Connect
-                  </button>
+                    <button className="bg-white text-black border border-black px-4 py-1 rounded text-sm hover:bg-blue-50 transition-colors">
+                      Connect
+                    </button>
                   </div>
-                 
                 </div>
               </div>
             </div>
