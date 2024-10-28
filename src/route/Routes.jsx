@@ -10,6 +10,7 @@ import Setting from "../pages/Setting";
 import Register from "../pages/Register";
 import EmailPassword from "../pages/submenu/EmailPassword";
 import Billing from "../pages/Billing";
+import ProfilePage from "../pages/ProfilePage";
 
 export const routes = [
   {
@@ -131,6 +132,14 @@ export const routes = [
   {
     path: "/setting/plan-billing",
     element: Billing,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    // roles: ["all"],
+  },
+  {
+    path: "/setting/add-teammates",
+    element: ProfilePage,
     isPrivate: true,
     exact: true,
     isView: true,
