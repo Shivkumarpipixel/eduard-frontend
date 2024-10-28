@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import HomeBanner from "../assets/home.svg";
+import HomeBanner from "../assets/BannerImage.svg";
 import { useTheme } from "@mui/material/styles";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
@@ -94,10 +94,11 @@ const Home = () => {
       {/* Card Section */}
       <div className="relative mt-10 rounded-xl bg-white flex flex-col space-y-2 w-[700px] h-[550px] p-6 mx-20">
         <h2
-          className={`text-4xl font-semibold ${currentSlide === 1 || currentSlide == 2
+          className={`text-4xl font-semibold ${
+            currentSlide === 1 || currentSlide == 2
               ? "text-black"
               : "text-[#F1BD6C]"
-            } `}
+          } `}
         >
           {slides[currentSlide].title}
         </h2>
@@ -117,7 +118,16 @@ const Home = () => {
             <source src={slides[currentSlide].videoSrc} type="video/mp4" />
             Your browser does not support HTML5 video.
           </video> */}
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/z_1xpi938bw?si=XjJ4ttcGGM5pZ2O8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/z_1xpi938bw?si=XjJ4ttcGGM5pZ2O8"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
 
