@@ -24,9 +24,11 @@ const ProfilePage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const id = data.id || "";
+      const id = data.id || null;
+      const userId = localStorage.getItem('userId');
+      data.user_id = userId;
       const response = await apiClient.post(
-        "/teammate/createOrUpdate/${id}",
+        `/teammate/createOrUpdate/${id}`,
         data
       ); // Update API endpoint as needed
       console.log("Response:", response.data);
@@ -60,27 +62,20 @@ const ProfilePage = () => {
           <form className="w-1/2" onSubmit={handleSubmit(onSubmit)}>
             {/* Input fields */}
             {[
-              { label: "Name", type: "text", placeholder: "Enter your name" },
-              { label: "Phone", type: "tel", placeholder: "+9999 9999 9999" },
-              {
-                label: "Address",
-                type: "text",
-                placeholder: "City town, London, 7090",
-              },
-              { label: "Email", type: "email", placeholder: "xyz@gmail.com" },
-              { label: "Website", type: "url", placeholder: "www.website.com" },
-              { label: "Gender", type: "text", placeholder: "Male" },
-              {
-                label: "Date of Birth",
-                type: "date",
-                placeholder: "10 Sep 1992",
-              },
+              { name: "name", label: "Name", type: "text", placeholder: "Enter your name" },
+              { name: "phone", label: "Phone", type: "tel", placeholder: "+9999 9999 9999" },
+              { name: "address", label: "Address", type: "text", placeholder: "City town, London, 7090" },
+              { name: "email", label: "Email", type: "email", placeholder: "xyz@gmail.com" },
+              { name: "website", label: "Website", type: "url", placeholder: "www.website.com" },
+              { name: "gender", label: "Gender", type: "text", placeholder: "Male" },
+              { name: "dob", label: "Date of Birth", type: "date", placeholder: "10 Sep 1992" },
             ].map((field, index) => (
               <div key={index} className="flex items-center ">
                 <label className="w-[150px] font-semibold text-gray-700">
                   {field.label}
                 </label>
                 <InputField
+                  register={register(field.name)} // Ensures each input is registered
                   className="w-full border border-gray-300 rounded px-2 py-1"
                   placeholder={field.placeholder}
                   type={field.type}
