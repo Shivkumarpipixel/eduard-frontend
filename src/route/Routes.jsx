@@ -89,37 +89,6 @@ export const routes = [
     isView: true,
     // roles: ["all"],
   },
-  {
-    path: "/setting",
-    element: Setting,
-    isPrivate: true,
-    exact: true,
-    isView: true,
-    // children: [
-    //   {
-    //     path: "add-teamates",
-    //     element: AddTeamates, // The component to render for this submenu
-    //     isPrivate: true,
-    //     exact: true,
-    //     isView: true,
-    //   },
-    //   {
-    //     path: "email-password",
-    //     element: EmailPassword, // The component to render for this submenu
-    //     isPrivate: true,
-    //     exact: true,
-    //     isView: true,
-    //   },
-    //   {
-    //     path: "plan-billing",
-    //     element: PlanBilling, // The component to render for this submenu
-    //     isPrivate: true,
-    //     exact: true,
-    //     isView: true,
-    //   },
-    // ],
-    // roles: ["all"],
-  },
   // submenu routes
   {
     path: "/setting/email-password",
@@ -132,6 +101,14 @@ export const routes = [
   {
     path: "/setting/plan-billing",
     element: Billing,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    // roles: ["all"],
+  },
+  {
+    path: "/setting",
+    element: Setting,
     isPrivate: true,
     exact: true,
     isView: true,

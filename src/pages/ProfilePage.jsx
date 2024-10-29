@@ -1,15 +1,40 @@
 import React, { useState } from "react";
 import InputField from "../Layout/InputField";
+import apiClient from "../interceptor/AuthInterceptor";
+import { useForm } from "react-hook-form";
 
 const ProfilePage = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const [profileImage, setProfileImage] = useState(defaultImage);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      const id = data.id || "";
+      const response = await apiClient.post(
+        "/teammate/createOrUpdate/${id}",
+        data
+      ); // Update API endpoint as needed
+      console.log("Response:", response.data);
+      alert("Profile saved successfully!");
+      reset();
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while saving the profile.");
     }
   };
 
@@ -32,7 +57,7 @@ const ProfilePage = () => {
 
         <div className="flex gap-10">
           {/* Left Side - Form */}
-          <form className="w-1/2">
+          <form className="w-1/2" onSubmit={handleSubmit(onSubmit)}>
             {/* Input fields */}
             {[
               { label: "Name", type: "text", placeholder: "Enter your name" },

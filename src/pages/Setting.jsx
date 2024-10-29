@@ -1,8 +1,12 @@
 import React from "react";
 import BlueImage from "../assets/blue.svg";
 import SettingImage from "../assets/setting.svg";
+import { useNavigate } from "react-router-dom";
 
 const Setting = () => {
+  const navigate = useNavigate();
+
+
   const setting = [
     {
       title: "Lorem Ipsum",
@@ -17,6 +21,10 @@ const Setting = () => {
       image: BlueImage,
     },
   ];
+
+  const handleCardClick = () => {
+    navigate("/setting/add-teammates");
+  };
   return (
     <>
       <div className="p-6 justify-between bg-gray-100 h-full">
@@ -24,7 +32,9 @@ const Setting = () => {
           <img className="w-full h-full" src={SettingImage} alt="Home Banner" />
           <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black ">
             <h1 className="text-5xl font-semibold ">Setting</h1>
-            <p className="text-slate-400 font-semibold">Manage your preferences and settings here.</p>
+            <p className="text-slate-400 font-semibold">
+              Manage your preferences and settings here.
+            </p>
           </div>
         </div>
         <div className="bg-white rounded-lg">
@@ -32,6 +42,7 @@ const Setting = () => {
             {setting.map((setting, index) => (
               <div
                 key={index}
+                onClick={handleCardClick}
                 className="bg-gray-100 rounded-lg shadow-sm p-4 w-full "
               >
                 <div className="flex items-start">
