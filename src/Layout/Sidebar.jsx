@@ -153,7 +153,7 @@ const allMenuList = [
     ),
     id: 5,
     subMenu: [
-      { menuTitle: "Add Teammates", path: "/setting/add-teammates", id: "5-1" },
+      { menuTitle: "Add Teammates", path: "/setting", id: "5-1" },
       {
         menuTitle: "Email/Password",
         path: "/setting/email-password",
