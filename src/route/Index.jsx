@@ -2,6 +2,7 @@ import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import { routes } from "./Routes";
+import NotFound from "../pages/NotFound";
 
 const RouterList = () => {
   return (

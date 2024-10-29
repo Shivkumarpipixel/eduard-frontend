@@ -11,6 +11,7 @@ import Register from "../pages/Register";
 import EmailPassword from "../pages/submenu/EmailPassword";
 import Billing from "../pages/Billing";
 import ProfilePage from "../pages/ProfilePage";
+import NotFound from "../pages/NotFound";
 
 export const routes = [
   {
@@ -145,4 +146,11 @@ export const routes = [
     isView: true,
     // roles: ["all"],
   },
+  {
+    path: "*",
+    element: NotFound,
+    isPrivate: false,
+    exact: false,
+    viewLabel: true,
+},
 ];
