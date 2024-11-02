@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import InputField from "../Layout/InputField";
 import apiClient from "../interceptor/AuthInterceptor";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../context/ToastProvider";
 
 const ProfilePage = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const [profileImage, setProfileImage] = useState(defaultImage);
+  const showToast = useToast();
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -25,15 +30,16 @@ const ProfilePage = () => {
   const onSubmit = async (data) => {
     try {
       const id = data.id || null;
-      const userId = localStorage.getItem('userId');
+      const userId = localStorage.getItem("userId");
       data.user_id = userId;
       const response = await apiClient.post(
         `/teammate/createOrUpdate/${id}`,
         data
       ); // Update API endpoint as needed
       console.log("Response:", response.data);
-      alert("Profile saved successfully!");
+      showToast("Profile saved successfully!", "success");
       reset();
+      setTimeout(() => navigate("/setting"), 1500);
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while saving the profile.");
@@ -52,7 +58,7 @@ const ProfilePage = () => {
         </button>
 
         {/* Title and Subtitle */}
-        <h2 className="text-3xl font-semibold text-gray-800 mb-1">Profile</h2>
+        <h2 className="text-3xl font-semibold text-gray-800  mb-1">Profile</h2>
         <p className="text-md text-gray-500 mb-6">
           Lorem Ipsum is simply dummy text of the printing.
         </p>
@@ -62,13 +68,48 @@ const ProfilePage = () => {
           <form className="w-1/2" onSubmit={handleSubmit(onSubmit)}>
             {/* Input fields */}
             {[
-              { name: "name", label: "Name", type: "text", placeholder: "Enter your name" },
-              { name: "phone", label: "Phone", type: "tel", placeholder: "+9999 9999 9999" },
-              { name: "address", label: "Address", type: "text", placeholder: "City town, London, 7090" },
-              { name: "email", label: "Email", type: "email", placeholder: "xyz@gmail.com" },
-              { name: "website", label: "Website", type: "url", placeholder: "www.website.com" },
-              { name: "gender", label: "Gender", type: "text", placeholder: "Male" },
-              { name: "dob", label: "Date of Birth", type: "date", placeholder: "10 Sep 1992" },
+              {
+                name: "name",
+                label: "Name",
+                type: "text",
+                placeholder: "Enter your name",
+              },
+              {
+                name: "phone",
+                label: "Phone",
+                type: "tel",
+                placeholder: "+9999 9999 9999",
+              },
+              {
+                name: "address",
+                label: "Address",
+                type: "text",
+                placeholder: "City town, London, 7090",
+              },
+              {
+                name: "email",
+                label: "Email",
+                type: "email",
+                placeholder: "xyz@gmail.com",
+              },
+              {
+                name: "website",
+                label: "Website",
+                type: "url",
+                placeholder: "www.website.com",
+              },
+              {
+                name: "gender",
+                label: "Gender",
+                type: "text",
+                placeholder: "Male",
+              },
+              {
+                name: "dob",
+                label: "Date of Birth",
+                type: "date",
+                placeholder: "10 Sep 1992",
+              },
             ].map((field, index) => (
               <div key={index} className="flex items-center ">
                 <label className="w-[150px] font-semibold text-gray-700">
@@ -92,6 +133,7 @@ const ProfilePage = () => {
                 Save
               </button>
               <button
+                onClick={() => navigate("/setting")}
                 className="py-2 px-8 bg-white text-gray-700 font-semibold rounded-lg hover:bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 type="button"
               >
