@@ -26,12 +26,13 @@ const ProfilePage = () => {
     const fetchTeammateData = async () => {
       try {
         const response = await apiClient.get(`/teammate/get/${teammateId}`);
-        console.log("Fetched data:", response.data);
+        // console.log("Fetched data:", response.data);
 
         const teammateData = response.data;
+        console.log(teammateData);
         if (teammateData) {
           reset(teammateData); // Set form fields with the data
-          setProfileImage(teammateData.profileImage || defaultImage); // Set profile image if available
+          setProfileImage(teammateData.profile_photo_path || defaultImage); // Set profile image if available
         }
       } catch (error) {
         console.error("Error fetching teammate data:", error);
@@ -45,6 +46,7 @@ const ProfilePage = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
+      setSelectedFile(file);
     }
   };
 
@@ -53,7 +55,10 @@ const ProfilePage = () => {
       console.log("Form data:", data); // Log to see if data is populated
 
       const formData = new FormData();
-      formData.append("id", teammateId);
+      const userId = localStorage.getItem('userId');
+
+      if (teammateId) formData.append("id", teammateId);
+      formData.append("user_id", userId);
       formData.append("name", data.name);
       formData.append("phone", data.phone);
       formData.append("address", data.address);
@@ -84,8 +89,8 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="bg-[#F0F0F0] flex justify-center items-center w-full h-screen">
-      <div className="relative bg-white rounded-lg shadow-lg p-8 w-[800px]">
+    <div className="common_page_container_outer">
+      <div className="common_page_container_inner">
         <button
           className="absolute top-6 right-6 py-2 px-4 bg-white text-gray-800 border border-gray-300 font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
           type="button"
@@ -99,7 +104,7 @@ const ProfilePage = () => {
         </p>
 
         <div className="flex gap-10">
-          <form className="w-1/2" onSubmit={handleSubmit(onSubmit)}>
+          <form className="container lg:w-1/2" onSubmit={handleSubmit(onSubmit)}>
             {/* Input fields */}
             {[
               {
@@ -145,16 +150,19 @@ const ProfilePage = () => {
                 placeholder: "10 Sep 1992",
               },
             ].map((field, index) => (
-              <div key={index} className="flex items-center mb-3">
+              <div key={index} className="flex items-center mb-6">
                 <label className="w-[150px] font-semibold text-gray-700">
                   {field.label}
                 </label>
-                <InputField
-                  name={field.name} // Pass the name prop here
-                  register={register(field.name, { required: true })} // Dynamic register based on field name
-                  placeholder={field.placeholder}
-                  type={field.type}
-                />
+                <div className="-mb-6 w-full">
+                  <InputField
+                    name={field.name} // Pass the name prop here
+                    register={register(field.name, { required: true })} // Dynamic register based on field name
+                    placeholder={field.placeholder}
+                    type={field.type}
+                  />
+                </div>
+
               </div>
             ))}
 
@@ -175,7 +183,7 @@ const ProfilePage = () => {
             </div>
           </form>
 
-          <div className="relative flex flex-col items-center">
+          <div className="lg:w-1/2 flex">
             <div className="relative w-56 h-56 rounded-full overflow-hidden shadow-lg">
               <img
                 src={profileImage}

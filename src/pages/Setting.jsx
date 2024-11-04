@@ -75,7 +75,9 @@ const Setting = () => {
                     <div
                       className="w-28 h-28 rounded-lg mr-4 flex-shrink-0 bg-cover bg-center"
                       style={{ backgroundImage: `url(${BlueImage})` }}
-                    ></div>
+                    >
+                    <img className="w-full h-full" src={teammate.profile_photo_path} alt="" />
+                  </div>
                     <div className="flex-grow">
                       <div className="flex justify-between items-center mb-2">
                         <h3 className="text-lg font-semibold">

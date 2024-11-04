@@ -16,7 +16,7 @@ const InputField = ({ placeholder, label, type, value, onChange, disabled, regis
         value={value}
         onChange={onChange}
         {...register}
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm   sm:text-sm"
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm"
       />
     </div>
   );
