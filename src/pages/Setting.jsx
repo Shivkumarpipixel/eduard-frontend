@@ -57,7 +57,7 @@ const Setting = () => {
         <div className="bg-white rounded-lg border">
           <div className="flex justify-end p-6">
             <button
-              onClick={() => navigate("/setting/add-teammates")}
+              onClick={() => navigate("/profile/add-teammates")}
               className="px-4 py-2 bg-yellow-400"
             >
               Add Teammate
@@ -68,7 +68,7 @@ const Setting = () => {
               teammates.map((teammate, index) => (
                 <div
                   key={teammate.id || index}
-                  onClick={handleCardClick}
+                  onClick={() => navigate(`/profile/${teammate.id}`)}
                   className="bg-gray-100 rounded-lg shadow-sm p-4 w-full"
                 >
                   <div className="flex items-start">

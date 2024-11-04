@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputField from "../Layout/InputField";
 import apiClient from "../interceptor/AuthInterceptor";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useToast } from "../context/ToastProvider";
 
 const ProfilePage = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const [profileImage, setProfileImage] = useState(defaultImage);
-  const showToast = useToast();
+  const [selectedFile, setSelectedFile] = useState(null); // To hold the uploaded file
 
+  const showToast = useToast();
   const navigate = useNavigate();
+  const { teammateId } = useParams();
 
   const {
     register,
@@ -18,6 +20,25 @@ const ProfilePage = () => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
+
+  useEffect(() => {
+    // Fetch teammate data by ID
+    const fetchTeammateData = async () => {
+      try {
+        const response = await apiClient.get(`/teammate/get/${teammateId}`);
+        console.log("Fetched data:", response.data);
+
+        const teammateData = response.data;
+        if (teammateData) {
+          reset(teammateData); // Set form fields with the data
+          setProfileImage(teammateData.profileImage || defaultImage); // Set profile image if available
+        }
+      } catch (error) {
+        console.error("Error fetching teammate data:", error);
+      }
+    };
+    if (teammateId) fetchTeammateData();
+  }, [teammateId, reset]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -29,13 +50,29 @@ const ProfilePage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const id = data.id || null;
-      const userId = localStorage.getItem("userId");
-      data.user_id = userId;
+      console.log("Form data:", data); // Log to see if data is populated
+
+      const formData = new FormData();
+      formData.append("id", teammateId);
+      formData.append("name", data.name);
+      formData.append("phone", data.phone);
+      formData.append("address", data.address);
+      formData.append("email", data.email);
+      formData.append("website", data.website);
+      formData.append("gender", data.gender);
+      formData.append("dob", data.dob);
+      if (selectedFile) formData.append("file", selectedFile);
+
       const response = await apiClient.post(
-        `/teammate/createOrUpdate/${id}`,
-        data
-      ); // Update API endpoint as needed
+        `/teammate/createOrUpdate/${teammateId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
       console.log("Response:", response.data);
       showToast("Profile saved successfully!", "success");
       reset();
@@ -49,7 +86,6 @@ const ProfilePage = () => {
   return (
     <div className="bg-[#F0F0F0] flex justify-center items-center w-full h-screen">
       <div className="relative bg-white rounded-lg shadow-lg p-8 w-[800px]">
-        {/* Edit Profile Button */}
         <button
           className="absolute top-6 right-6 py-2 px-4 bg-white text-gray-800 border border-gray-300 font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
           type="button"
@@ -57,14 +93,12 @@ const ProfilePage = () => {
           Edit Profile
         </button>
 
-        {/* Title and Subtitle */}
-        <h2 className="text-3xl font-semibold text-gray-800  mb-1">Profile</h2>
+        <h2 className="text-3xl font-semibold text-gray-800 mb-1">Profile</h2>
         <p className="text-md text-gray-500 mb-6">
           Lorem Ipsum is simply dummy text of the printing.
         </p>
 
         <div className="flex gap-10">
-          {/* Left Side - Form */}
           <form className="w-1/2" onSubmit={handleSubmit(onSubmit)}>
             {/* Input fields */}
             {[
@@ -111,20 +145,19 @@ const ProfilePage = () => {
                 placeholder: "10 Sep 1992",
               },
             ].map((field, index) => (
-              <div key={index} className="flex items-center ">
+              <div key={index} className="flex items-center mb-3">
                 <label className="w-[150px] font-semibold text-gray-700">
                   {field.label}
                 </label>
                 <InputField
-                  register={register(field.name)} // Ensures each input is registered
-                  className="w-full border border-gray-300 rounded px-2 py-1"
+                  name={field.name} // Pass the name prop here
+                  register={register(field.name, { required: true })} // Dynamic register based on field name
                   placeholder={field.placeholder}
                   type={field.type}
                 />
               </div>
             ))}
 
-            {/* Save and Cancel Buttons */}
             <div className="flex items-center mt-5 gap-4">
               <button
                 className="py-2 px-8 bg-[#F1BD6C] text-white font-semibold rounded-lg hover:bg-[#e0a635] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
@@ -142,7 +175,6 @@ const ProfilePage = () => {
             </div>
           </form>
 
-          {/* Right Side - Profile Image with Hover Effect */}
           <div className="relative flex flex-col items-center">
             <div className="relative w-56 h-56 rounded-full overflow-hidden shadow-lg">
               <img

@@ -116,7 +116,15 @@ export const routes = [
     // roles: ["all"],
   },
   {
-    path: "/setting/add-teammates",
+    path: "/profile/:teammateId",
+    element: ProfilePage,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    // roles: ["all"],
+  },
+  {
+    path: "/profile/add-teammates",
     element: ProfilePage,
     isPrivate: true,
     exact: true,
@@ -129,5 +137,5 @@ export const routes = [
     isPrivate: false,
     exact: false,
     viewLabel: true,
-},
+  },
 ];
