@@ -29,7 +29,7 @@ const ConnectChannels = () => {
 
   return (
     <div className="p-6 bg-gray-100 space-y-6 h-full">
-      <div className="relative  ">
+      {/* <div className="relative  ">
         <img className="w-full h-52" src={ChannelImage} alt="Home Banner" />
         <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black">
           <h1 className="text-5xl font-semibold">Connect Channels</h1>
@@ -37,7 +37,18 @@ const ConnectChannels = () => {
             Lorem Ipsum is simply dummy text of the printing.
           </p>
         </div>
+      </div> */}
+
+      <div className="relative w-full py-5">
+        <img className="w-full h-full" src={ChannelImage} alt="Home Banner" />
+        <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black ">
+          <h1 className="text-5xl font-semibold">Connect Channels</h1>
+          <p className="text-slate-400 font-semibold">
+            Lorem Ipsum is simply dummy text of the printing.
+          </p>
+        </div>
       </div>
+
       <div className="bg-white p-6 rounded-xl">
         <div className="grid grid-cols-3 md:grid-cols-2 gap-6">
           {channels.map((channel, index) => (

@@ -86,6 +86,17 @@ const Home = () => {
 
   return (
     <div className="relative w-full h-full bg-gray-100 p-10">
+
+      {/* <div className="relative w-full py-5">
+        <img className="w-full h-full" src={ScriptImage} alt="Home Banner" />
+        <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black ">
+          <h1 className="text-5xl font-semibold">Script</h1>
+          <p className="text-slate-400 font-semibold">
+            Lorem Ipsum is simply dummy text of the printing.
+          </p>
+        </div>
+      </div> */}
+
       {/* Banner */}
       <div className="w-full ml-16 ">
         <img className="w-[1024px]" src={HomeBanner} alt="Home Banner" />
@@ -94,11 +105,10 @@ const Home = () => {
       {/* Card Section */}
       <div className="relative mt-10 rounded-xl bg-white flex flex-col space-y-2 w-[700px] h-[550px] p-6 mx-20">
         <h2
-          className={`text-4xl font-semibold ${
-            currentSlide === 1 || currentSlide == 2
+          className={`text-4xl font-semibold ${currentSlide === 1 || currentSlide == 2
               ? "text-black"
               : "text-[#F1BD6C]"
-          } `}
+            } `}
         >
           {slides[currentSlide].title}
         </h2>

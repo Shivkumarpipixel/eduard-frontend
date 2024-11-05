@@ -12,6 +12,10 @@ import EmailPassword from "../pages/submenu/EmailPassword";
 import Billing from "../pages/Billing";
 import ProfilePage from "../pages/ProfilePage";
 import NotFound from "../pages/NotFound";
+import SocialMediaManager from "../components/scripts/SocialMediaManager";
+import BirthdayCampaign from "../components/scripts/BirthdayCampaign";
+import abandonedCart from "../components/scripts/AbandonedCart";
+import festivalCampaign from "../components/scripts/FestivalCampaign";
 
 export const routes = [
   {
@@ -53,6 +57,38 @@ export const routes = [
   {
     path: "/script",
     element: Script,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    roles: ["all"],
+  },
+  {
+    path: "/script/social-media",
+    element: SocialMediaManager,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    roles: ["all"],
+  },
+  {
+    path: "/script/festive-discount",
+    element: festivalCampaign,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    roles: ["all"],
+  },
+  {
+    path: "/script/birthday-greeting",
+    element: BirthdayCampaign,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    roles: ["all"],
+  },
+  {
+    path: "/script/abandoned-cart",
+    element: abandonedCart,
     isPrivate: true,
     exact: true,
     isView: true,
