@@ -12,6 +12,7 @@ import EmailPassword from "../pages/submenu/EmailPassword";
 import Billing from "../pages/Billing";
 import ProfilePage from "../pages/ProfilePage";
 import NotFound from "../pages/NotFound";
+import SettingProfile from "../Layout/SettingProfile";
 
 export const routes = [
   {
@@ -126,6 +127,14 @@ export const routes = [
   {
     path: "/profile/add-teammates",
     element: ProfilePage,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    // roles: ["all"],
+  },
+  {
+    path: "/setting-profile",
+    element: SettingProfile,
     isPrivate: true,
     exact: true,
     isView: true,
