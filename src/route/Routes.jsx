@@ -16,6 +16,7 @@ import SocialMediaManager from "../components/scripts/SocialMediaManager";
 import BirthdayCampaign from "../components/scripts/BirthdayCampaign";
 import abandonedCart from "../components/scripts/AbandonedCart";
 import festivalCampaign from "../components/scripts/FestivalCampaign";
+import SettingProfile from "../Layout/SettingProfile";
 
 export const routes = [
   {
@@ -162,6 +163,14 @@ export const routes = [
   {
     path: "/profile/add-teammates",
     element: ProfilePage,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    // roles: ["all"],
+  },
+  {
+    path: "/setting-profile",
+    element: SettingProfile,
     isPrivate: true,
     exact: true,
     isView: true,
