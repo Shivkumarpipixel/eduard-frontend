@@ -10,6 +10,7 @@ const AbandonedCart = ({
   getAllInstalledTemplates,
 }) => {
   const [formData, setFormData] = useState({
+    user_id :1,
     Abandon_Cart_Time_in_Hours: 0,
     Abandoned_Cart_Message1_Time: '',
     Abandoned_Cart_Message2_Time: '',
