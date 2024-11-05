@@ -7,7 +7,7 @@ const FestivalCampaign = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="common_page_container_outer">
+        <div className="common_page_container_outer overflow-auto">
             <div className="common_page_container_inner">
 
                 <div className='lg:w-1/2 w-full'>

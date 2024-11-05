@@ -52,10 +52,10 @@ const Script = () => {
       <div className="bg-white p-6 rounded-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {scripts.map((script, index) => (
-            <div key={index} className="bg-gray-100 rounded-lg shadow-sm p-4" onClick={() => navigate(script.url)}>
+            <div key={index} className="bg-gray-100 rounded-lg shadow-sm p-4">
               <div className="flex items-start">
                 <div
-                  className="w-28 h-28 rounded-lg mr-4 flex-shrink-0 bg-cover  bg-center"
+                  className="w-28 h-28 rounded-lg mr-4 flex-shrink-0 bg-cover bg-center"
                   style={{ backgroundImage: `url(${script.image})` }}
                 ></div>
                 <div className="flex-grow">
@@ -73,7 +73,10 @@ const Script = () => {
                     {script.description}
                   </p>
                   <div className="flex justify-end">
-                    <button className="bg-white text-black border border-black px-4 py-1 rounded text-sm hover:bg-blue-50 transition-colors">
+                    <button
+                      onClick={() => navigate(script.url)}
+                      className="bg-white text-black border border-black px-4 py-1 rounded text-sm hover:bg-blue-50 transition-colors"
+                    >
                       Connect
                     </button>
                   </div>
@@ -82,6 +85,7 @@ const Script = () => {
             </div>
           ))}
         </div>
+
       </div>
 
       <style jsx>{`
