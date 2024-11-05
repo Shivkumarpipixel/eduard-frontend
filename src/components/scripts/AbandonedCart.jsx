@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../interceptor/AuthInterceptor";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const AbandonedCart = ({
   chatbotId,
@@ -56,12 +56,12 @@ const AbandonedCart = ({
 
       if (response.status === 201) {
         console.log("Abandoned template added");
-        toast.success("Data saved successfully");
+        // toast.success("Data saved successfully");
         getAllInstalledTemplates();
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Error saving data");
+    //   toast.error("Error saving data");
     }
   };
 
