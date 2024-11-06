@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import noProfile from "../assets/login.png";
-// import apiClient from "../interceptor/interceptor";
 
 const ProfileImageContext = createContext();
 
@@ -30,18 +29,15 @@ export const ProfileImageProvider = ({ children }) => {
         }
       }
 
-      // const data = await response.json();
       
     } catch (error) {
-      // console.error("Error fetching user data:", error);
     }
   };
 
   useEffect(() => {
     let token = localStorage.getItem('access_token');
     if(token){
-      // console.log("Got the token after that I am calling this");
-      // fetchUserData();
+      
     }
   }, []);
 

@@ -8,7 +8,7 @@ import { useToast } from "../context/ToastProvider";
 const ProfilePage = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const [profileImage, setProfileImage] = useState(defaultImage);
-  const [selectedFile, setSelectedFile] = useState(null); // To hold the uploaded file
+  const [selectedFile, setSelectedFile] = useState(null); 
 
   const showToast = useToast();
   const navigate = useNavigate();
@@ -31,8 +31,8 @@ const ProfilePage = () => {
         const teammateData = response.data;
         console.log(teammateData);
         if (teammateData) {
-          reset(teammateData); // Set form fields with the data
-          setProfileImage(teammateData.profile_photo_path || defaultImage); // Set profile image if available
+          reset(teammateData); 
+          setProfileImage(teammateData.profile_photo_path || defaultImage); 
         }
       } catch (error) {
         console.error("Error fetching teammate data:", error);
@@ -40,22 +40,65 @@ const ProfilePage = () => {
     };
     if (teammateId) fetchTeammateData();
   }, [teammateId, reset]);
+  const handleChange = (field, value) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [field]: value,
+    }));
+  };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const onFileChange = (event) => {
+    console.log("onFileChange triggered");
+    let file = event.target.files[0];
+    console.log("File selected:", file);
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
+      console.log("File exists, setting state and uploading");
       setSelectedFile(file);
+      handleUpload(file);
+      file = null;
+    } else {
+      console.log("No file selected.");
+    }
+  };
+
+  const handleUpload = async (file) => {
+    console.log("Handle upload");
+    const user_id = localStorage.getItem("userId");
+
+    let form_data = new FormData();
+    form_data.append("file", file);
+    form_data.append("user_id", user_id);
+
+    try {
+      const response = await apiClient.post(
+        `/teammate/uploadProfile/${teammateId}`, 
+        form_data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (response.status === 200) {
+        let data = response.data;
+        // fetchUser();
+        setSelectedFile(null);
+        console.log("Upload response:", response);
+      }
+    } catch (error) {
+      console.error(
+        "Error uploading file:",
+        error.response?.data || error.message
+      );
     }
   };
 
   const onSubmit = async (data) => {
     try {
-      console.log("Form data:", data); // Log to see if data is populated
+      console.log("Form data:", data);
 
       const formData = new FormData();
-      const userId = localStorage.getItem('userId');
+      const userId = localStorage.getItem("userId");
 
       if (teammateId) formData.append("id", teammateId);
       formData.append("user_id", userId);
@@ -91,20 +134,16 @@ const ProfilePage = () => {
   return (
     <div className="common_page_container_outer">
       <div className="common_page_container_inner">
-        <button
-          className="absolute top-6 right-6 py-2 px-4 bg-white text-gray-800 border border-gray-300 font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-          type="button"
-        >
-          Edit Profile
-        </button>
-
         <h2 className="text-3xl font-semibold text-gray-800 mb-1">Profile</h2>
         <p className="text-md text-gray-500 mb-6">
           Lorem Ipsum is simply dummy text of the printing.
         </p>
 
         <div className="flex gap-10">
-          <form className="container lg:w-1/2" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="container lg:w-1/2"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             {/* Input fields */}
             {[
               {
@@ -162,7 +201,6 @@ const ProfilePage = () => {
                     type={field.type}
                   />
                 </div>
-
               </div>
             ))}
 
@@ -204,7 +242,7 @@ const ProfilePage = () => {
               type="file"
               accept="image/*"
               style={{ display: "none" }}
-              onChange={handleImageChange}
+              onChange={onFileChange}
             />
           </div>
         </div>

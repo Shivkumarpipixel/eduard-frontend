@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import "./App.css";
-import AppRoutes from './route/Index';
+// import AppRoutes from './route/Index';
 import RouterList from "./route/Index";
 
 function App() {

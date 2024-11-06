@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 // import Footer from "./Footer";
 import { SidebarMain } from "./Sidebar";
+import { UserProvider } from "../context/UserContext";
 
 const Layout = ({ children }) => {
     const [open, setOpen] = React.useState(false);
@@ -14,6 +15,7 @@ const Layout = ({ children }) => {
     }
     return (
         <>
+         <UserProvider> 
             <SidebarMain open={open} backdropClick={backdropClick} />
             <div className="main_contain_wrap">
                 {/* {
@@ -23,6 +25,7 @@ const Layout = ({ children }) => {
                 <Header siderBarFn={siderBarFn} />
                 {children}
             </div>
+            </UserProvider>
         </>
     )
 };
