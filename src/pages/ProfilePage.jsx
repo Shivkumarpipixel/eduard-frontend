@@ -8,7 +8,7 @@ import { useToast } from "../context/ToastProvider";
 const ProfilePage = () => {
   const defaultImage = "https://via.placeholder.com/150";
   const [profileImage, setProfileImage] = useState(defaultImage);
-  const [selectedFile, setSelectedFile] = useState(null); 
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const showToast = useToast();
   const navigate = useNavigate();
@@ -31,8 +31,8 @@ const ProfilePage = () => {
         const teammateData = response.data;
         console.log(teammateData);
         if (teammateData) {
-          reset(teammateData); 
-          setProfileImage(teammateData.profile_photo_path || defaultImage); 
+          reset(teammateData);
+          setProfileImage(teammateData.profile_photo_path || defaultImage);
         }
       } catch (error) {
         console.error("Error fetching teammate data:", error);
@@ -71,7 +71,7 @@ const ProfilePage = () => {
 
     try {
       const response = await apiClient.post(
-        `/teammate/uploadProfile/${teammateId}`, 
+        `/teammate/uploadProfile/${teammateId}`,
         form_data,
         {
           headers: {
@@ -136,7 +136,8 @@ const ProfilePage = () => {
       <div className="common_page_container_inner">
         <h2 className="text-3xl font-semibold text-gray-800 mb-1">Profile</h2>
         <p className="text-md text-gray-500 mb-6">
-          Lorem Ipsum is simply dummy text of the printing.
+          Manage and update your personal details, preferences, and account
+          settings.
         </p>
 
         <div className="flex gap-10">
@@ -195,8 +196,8 @@ const ProfilePage = () => {
                 </label>
                 <div className="-mb-6 w-full">
                   <InputField
-                    name={field.name} // Pass the name prop here
-                    register={register(field.name, { required: true })} // Dynamic register based on field name
+                    name={field.name} 
+                    register={register(field.name, { required: true })} 
                     placeholder={field.placeholder}
                     type={field.type}
                   />

@@ -25,8 +25,6 @@ const SettingProfile = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  
-
   useEffect(() => {
     const fetchTeammateData = async () => {
       try {
@@ -89,7 +87,7 @@ const SettingProfile = () => {
 
   const onSubmit = async (data) => {
     try {
-      // Prepare JSON data for user profile fields
+      
       const jsonData = {
         user_id: userId,
         name: data.name,
@@ -103,14 +101,12 @@ const SettingProfile = () => {
 
       let response;
 
-      // Check if there is a file to upload
+ 
       if (selectedFile) {
-        // If there's a file, use FormData for the file upload only
         const formData = new FormData();
         formData.append("file", selectedFile);
         formData.append("user_id", userId);
 
-        // Upload the file separately
         await apiClient.post(`/user/uploadProfile/${userId}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -118,7 +114,6 @@ const SettingProfile = () => {
         });
       }
 
-      // Send profile data as JSON
       response = await apiClient.put(`/user/updateUser/${userId}`, jsonData, {
         headers: { "Content-Type": "application/json" },
       });
@@ -126,9 +121,8 @@ const SettingProfile = () => {
       console.log("Response:", response.data);
       showToast("Profile saved successfully!", "success");
       updateUser({ name: data.name });
-      console.log(updateUser)
+      console.log(updateUser);
       reset();
-      // setTimeout(() => navigate("/setting"), 1500);
     } catch (error) {
       console.error("Error updating profile:", error);
       showToast("An error occurred while saving the profile.", "error");
@@ -140,7 +134,8 @@ const SettingProfile = () => {
       <div className="common_page_container_inner">
         <h2 className="text-3xl font-semibold text-gray-800 mb-1">Profile</h2>
         <p className="text-md text-gray-500 mb-6">
-          Lorem Ipsum is simply dummy text of the printing.
+          Manage and update your personal details, preferences, and account
+          settings.
         </p>
 
         <div className="flex gap-10">
