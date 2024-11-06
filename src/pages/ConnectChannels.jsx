@@ -10,41 +10,32 @@ const ConnectChannels = () => {
     {
       title: "Facebook",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Engage with your audience on Facebook by connecting seamlessly, allowing for automated responses, post scheduling, and insightful analytics to drive brand interaction.",
       image: FacebookImage,
     },
     {
       title: "Instagram",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Connect with Instagram to streamline posting, manage direct messages, and monitor audience engagement, keeping your profile active and responsive.",
       image: InstagramImage,
     },
     {
       title: "WhatsApp",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Stay close to your customers on WhatsApp by automating responses, sending notifications, and managing inquiries in real-time for quick, efficient support.",
       image: WhatsAppImage,
     },
   ];
 
+
   return (
     <div className="p-6 bg-gray-100 space-y-6 h-full">
-      {/* <div className="relative  ">
-        <img className="w-full h-52" src={ChannelImage} alt="Home Banner" />
-        <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black">
-          <h1 className="text-5xl font-semibold">Connect Channels</h1>
-          <p className="text-slate-400 font-semibold">
-            Lorem Ipsum is simply dummy text of the printing.
-          </p>
-        </div>
-      </div> */}
-
       <div className="relative w-full py-5">
         <img className="w-full h-full" src={ChannelImage} alt="Home Banner" />
         <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black ">
           <h1 className="text-5xl font-semibold">Connect Channels</h1>
           <p className="text-slate-400 font-semibold">
-            Lorem Ipsum is simply dummy text of the printing.
+            Connect channels to automate engagement and streamline communication.
           </p>
         </div>
       </div>

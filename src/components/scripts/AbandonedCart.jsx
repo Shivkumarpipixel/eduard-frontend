@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../interceptor/AuthInterceptor";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const AbandonedCart = ({
   chatbotId,
@@ -37,11 +37,13 @@ const AbandonedCart = ({
 
   const installAbandonedCart = async () => {
     try {
+      // const user_id = localStorage.getItem('userId');
+      const user_id = 1;
       const url = `/aiSkill/installAbandonedCart`;
-      console.log(url);
       const response = await apiClient.post(url, {
         ...formData,
         Is_Abandoned_Cart_Required: "true",
+        user_id:user_id,
         is_active: true,
         chatbot_id: chatbotId,
         Abandoned_Cart_Message1_Time_in_Minutes: convertDelayInMinutes(formData.Abandoned_Cart_Message1_Time_type, formData.Abandoned_Cart_Message1_Time),
@@ -52,15 +54,15 @@ const AbandonedCart = ({
           "Content-Type": "application/json",
         },
       });
-
       if (response.status === 201) {
         console.log("Abandoned template added");
-        toast.success("Data saved successfully");
+        // toast.success("Data saved successfully");
         getAllInstalledTemplates();
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Error saving data");
+      console.log("Response data:", error?.response?.data);
+    //   toast.error("Error saving data");
     }
   };
 
@@ -77,8 +79,8 @@ const AbandonedCart = ({
   }, [templateData]);
 
   return (
-    <div className="common_page_container_outer overflow-auto">
-      <div className="common_page_container_inner">
+    <div className="common_page_container_outer">
+      <div className="common_page_container_inner overflow-auto">
         <div className='lg:w-1/2 w-full'>
           <div className="cm_title_head">
             <h3 className="flex text-3xl font-semibold text-gray-800 mb-2 text-center">Abandoned Cart Settings</h3>
