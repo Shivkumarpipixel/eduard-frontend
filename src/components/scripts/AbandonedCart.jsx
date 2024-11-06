@@ -77,8 +77,8 @@ const AbandonedCart = ({
   }, [templateData]);
 
   return (
-    <div className="common_page_container_outer overflow-auto">
-      <div className="common_page_container_inner">
+    <div className="common_page_container_outer">
+      <div className="common_page_container_inner overflow-auto">
         <div className='lg:w-1/2 w-full'>
           <div className="cm_title_head">
             <h3 className="flex text-3xl font-semibold text-gray-800 mb-2 text-center">Abandoned Cart Settings</h3>
