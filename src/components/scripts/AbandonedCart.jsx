@@ -37,11 +37,13 @@ const AbandonedCart = ({
 
   const installAbandonedCart = async () => {
     try {
+      // const user_id = localStorage.getItem('userId');
+      const user_id = 1;
       const url = `/aiSkill/installAbandonedCart`;
-      console.log(url);
       const response = await apiClient.post(url, {
         ...formData,
         Is_Abandoned_Cart_Required: "true",
+        user_id:user_id,
         is_active: true,
         chatbot_id: chatbotId,
         Abandoned_Cart_Message1_Time_in_Minutes: convertDelayInMinutes(formData.Abandoned_Cart_Message1_Time_type, formData.Abandoned_Cart_Message1_Time),
@@ -52,7 +54,6 @@ const AbandonedCart = ({
           "Content-Type": "application/json",
         },
       });
-
       if (response.status === 201) {
         console.log("Abandoned template added");
         // toast.success("Data saved successfully");
@@ -60,6 +61,7 @@ const AbandonedCart = ({
       }
     } catch (error) {
       console.error("Error:", error);
+      console.log("Response data:", error?.response?.data);
     //   toast.error("Error saving data");
     }
   };
