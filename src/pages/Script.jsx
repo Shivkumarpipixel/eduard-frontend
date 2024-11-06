@@ -77,7 +77,7 @@ const Script = () => {
       (element) => element.template_id == templateId
     );
     console.log(result);
-    navigate(url + '?id=' + result[0].id);
+    navigate(url + '?id=' + result[0]?.id);
   }
 
   return (
