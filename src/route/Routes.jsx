@@ -17,6 +17,9 @@ import BirthdayCampaign from "../components/scripts/BirthdayCampaign";
 import abandonedCart from "../components/scripts/AbandonedCart";
 import festivalCampaign from "../components/scripts/FestivalCampaign";
 import SettingProfile from "../Layout/SettingProfile";
+import Facebook from "../components/channels/Facebook";
+import Instagram from "../components/channels/Instagram";
+import Whatsapp from "../components/channels/WhatsApp";
 
 export const routes = [
   {
@@ -90,6 +93,30 @@ export const routes = [
   {
     path: "/script/abandoned-cart",
     element: abandonedCart,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    roles: ["all"],
+  },
+  {
+    path: "/channel/facebook",
+    element: Facebook,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    roles: ["all"],
+  },
+  {
+    path: "/channel/instagram",
+    element: Instagram,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    roles: ["all"],
+  },
+  {
+    path: "/channel/whatsapp",
+    element: Whatsapp,
     isPrivate: true,
     exact: true,
     isView: true,

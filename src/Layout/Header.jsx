@@ -20,6 +20,7 @@ const Header = ({ siderBarFn }) => {
       try {
         const response = await apiClient.get(`/user/getById/${userId}`);
         const UserData = response.data;
+        localStorage.setItem("workspace_id", response.data.workspace_id);
         console.log(response.data);
 
         if (UserData) {
