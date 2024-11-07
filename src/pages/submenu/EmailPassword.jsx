@@ -23,7 +23,7 @@ const EmailPassword = () => {
   useEffect(() => {
     const storeEmail = localStorage.getItem("userEmail");
     if (storeEmail) {
-      setFormData(prev => ({ ...prev, email: storeEmail }));
+      setFormData((prev) => ({ ...prev, email: storeEmail }));
     }
   }, []);
 
@@ -54,16 +54,17 @@ const EmailPassword = () => {
     },
   ];
 
-  const isFormValid = formData.newPassword &&
+  const isFormValid =
+    formData.newPassword &&
     formData.newPassword === formData.confirmPassword &&
     formData.newPassword.length >= 6;
 
   // Updated handleChange function
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
-      [id]: value
+      [id]: value,
     }));
     setError("");
     setSuccess("");
@@ -75,7 +76,10 @@ const EmailPassword = () => {
     setConfirmPassTouched(true);
 
     // Check if `newPassword` and `resetToken` are strings
-    if (typeof formData.newPassword !== "string" || typeof formData.resetToken !== "string") {
+    if (
+      typeof formData.newPassword !== "string" ||
+      typeof formData.resetToken !== "string"
+    ) {
       setError("Please check your inputs.");
       return;
     }
@@ -112,7 +116,6 @@ const EmailPassword = () => {
         }, 1500);
       }
     } catch (error) {
-
       if (error.response) {
         if (error.response.status === 401) {
           const errorMessage = error.response.data.message;
@@ -131,7 +134,6 @@ const EmailPassword = () => {
       setLoading(false);
     }
   };
-
 
   return (
     <div className="common_page_container_outer">

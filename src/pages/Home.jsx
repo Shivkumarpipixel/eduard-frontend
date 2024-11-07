@@ -12,7 +12,7 @@ const Home = () => {
     {
       title: "Let’s get Started!.",
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+        "We build intelligent bots that simplify your workflow and enhance productivity. From automating tasks to optimizing processes, our solutions are designed to make your business smarter and more efficient. Discover how Automationz can drive your success forward!",
       videoSrc:
         "https://your-support.s3.eu-west-3.amazonaws.com/3d_getting_started_2.mp4",
     },
@@ -20,14 +20,14 @@ const Home = () => {
       title: "Scripts",
 
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+        "We build intelligent bots that simplify your workflow and enhance productivity. From automating tasks to optimizing processes, our solutions are designed to make your business smarter and more efficient. Discover how Automationz can drive your success forward!",
       videoSrc: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
     },
     {
       title: "Live Chat",
 
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+        "We build intelligent bots that simplify your workflow and enhance productivity. From automating tasks to optimizing processes, our solutions are designed to make your business smarter and more efficient. Discover how Automationz can drive your success forward!",
       videoSrc: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
     },
   ];
