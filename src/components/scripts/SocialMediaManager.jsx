@@ -42,12 +42,16 @@ const SocialMediaManager = () => {
         try {
             const query = new URLSearchParams(location.search);
             const id = query.get('id');
-            const url = `/aiSkill/getData/${id}`;
-            const response = await apiClient.get(url);
-            if (response.status === 200) {
-                let templete = response.data;
-                console.log(templete);
-                setFormData(templete.template_data)
+            
+            // Check if id is neither undefined nor "undefined" nor null
+            if (id && id !== 'undefined') {
+                const url = `/aiSkill/getData/${id}`;
+                const response = await apiClient.get(url);
+                if (response.status === 200) {
+                    let template = response.data;
+                    console.log(template);
+                    setFormData(template.template_data || {});
+                }
             }
         } catch (error) {
             console.error(error);

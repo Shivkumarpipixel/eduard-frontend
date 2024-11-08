@@ -39,6 +39,7 @@ const AbandonedCart = ({
     try {
       const url = `/aiSkill/installAbandonedCart`;
       console.log(url);
+      formData.user_id = localStorage.getItem('userId');
       const response = await apiClient.post(url, {
         ...formData,
         Is_Abandoned_Cart_Required: "true",
@@ -60,7 +61,7 @@ const AbandonedCart = ({
       }
     } catch (error) {
       console.error("Error:", error);
-    //   toast.error("Error saving data");
+      //   toast.error("Error saving data");
     }
   };
 
@@ -76,6 +77,30 @@ const AbandonedCart = ({
     }
   }, [templateData]);
 
+  const getTemplateById = async () => {
+    try {
+        const query = new URLSearchParams(location.search);
+        const id = query.get('id');
+        
+        // Check if id is neither undefined nor "undefined" nor null
+        if (id && id !== 'undefined') {
+            const url = `/aiSkill/getData/${id}`;
+            const response = await apiClient.get(url);
+            if (response.status === 200) {
+                let template = response.data;
+                console.log(template);
+                setFormData(template.template_data || {});
+            }
+        }
+    } catch (error) {
+        console.error(error);
+    }
+  };
+
+  useEffect(() => {
+      getTemplateById();
+  }, []);
+
   return (
     <div className="common_page_container_outer">
       <div className="common_page_container_inner overflow-auto">
@@ -85,73 +110,61 @@ const AbandonedCart = ({
             <p className="flex text-md text-gray-500 mb-6 text-center">Configure your abandoned cart messages below.</p>
           </div>
 
-          <div className='mb-6'>
-            <label className='text-sm font-medium text-gray-700'>Enable Abandoned Cart Messages?</label>
-            <input
-              type="checkbox"
-              checked={isAbandonedCartRequired}
-              onChange={(e) => setIsAbandonedCartRequired(e.target.checked)}
-              className='ml-2'
-            />
-          </div>
+          <div>
+            {[1, 2, 3].map((msgNum) => (
+              <div key={msgNum} className='mb-6'>
+                <label className='text-sm font-medium text-gray-700'>Message {msgNum}:</label>
+                <textarea
+                  className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm mt-2'
+                  placeholder={`Enter Abandoned Cart Message ${msgNum}`}
+                  rows={2}
+                  value={formData[`Abandoned_Cart_Message${msgNum}`]}
+                  onChange={(e) => handleChange(`Abandoned_Cart_Message${msgNum}`, e.target.value)}
+                ></textarea>
 
-          {isAbandonedCartRequired && (
-            <>
-              {[1, 2, 3].map((msgNum) => (
-                <div key={msgNum} className='mb-6'>
-                  <label className='text-sm font-medium text-gray-700'>Message {msgNum}:</label>
-                  <textarea
-                    className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm mt-2'
-                    placeholder={`Enter Abandoned Cart Message ${msgNum}`}
-                    rows={2}
-                    value={formData[`Abandoned_Cart_Message${msgNum}`]}
-                    onChange={(e) => handleChange(`Abandoned_Cart_Message${msgNum}`, e.target.value)}
-                  ></textarea>
+                <label className='text-sm font-medium text-gray-700 mt-4'>Time Delay for Message {msgNum} (in Minutes):</label>
+                <input
+                  type="number"
+                  placeholder="Time in minutes"
+                  className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm mt-2'
+                  value={formData[`Abandoned_Cart_Message${msgNum}_Time`]}
+                  onChange={(e) => handleChange(`Abandoned_Cart_Message${msgNum}_Time`, e.target.value)}
+                />
 
-                  <label className='text-sm font-medium text-gray-700 mt-4'>Time Delay for Message {msgNum} (in Minutes):</label>
+                <label className='text-sm font-medium text-gray-700 mt-4'>Discount for Message {msgNum}:</label>
+                <div className='flex gap-3 mt-2'>
                   <input
                     type="number"
-                    placeholder="Time in minutes"
-                    className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm mt-2'
-                    value={formData[`Abandoned_Cart_Message${msgNum}_Time`]}
-                    onChange={(e) => handleChange(`Abandoned_Cart_Message${msgNum}_Time`, e.target.value)}
+                    placeholder="Discount percentage"
+                    className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm'
+                    value={formData[`Abandoned_Cart_Message${msgNum}_discount`]}
+                    onChange={(e) => handleChange(`Abandoned_Cart_Message${msgNum}_discount`, e.target.value)}
                   />
-
-                  <label className='text-sm font-medium text-gray-700 mt-4'>Discount for Message {msgNum}:</label>
-                  <div className='flex gap-3 mt-2'>
-                    <input
-                      type="number"
-                      placeholder="Discount percentage"
-                      className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm'
-                      value={formData[`Abandoned_Cart_Message${msgNum}_discount`]}
-                      onChange={(e) => handleChange(`Abandoned_Cart_Message${msgNum}_discount`, e.target.value)}
-                    />
-                    <select
-                      className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm'
-                      value={formData[`Abandoned_Cart_Message${msgNum}_Discount_type`]}
-                      onChange={(e) => handleChange(`Abandoned_Cart_Message${msgNum}_Discount_type`, e.target.value)}
-                    >
-                      <option value="percentage">Percentage</option>
-                      <option value="fixed">Fixed Amount</option>
-                    </select>
-                  </div>
+                  <select
+                    className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm'
+                    value={formData[`Abandoned_Cart_Message${msgNum}_Discount_type`]}
+                    onChange={(e) => handleChange(`Abandoned_Cart_Message${msgNum}_Discount_type`, e.target.value)}
+                  >
+                    <option value="percentage">Percentage</option>
+                    <option value="fixed">Fixed Amount</option>
+                  </select>
                 </div>
-              ))}
-
-              <div className='mb-6'>
-                <label className='text-sm font-medium text-gray-700'>Preferred Channel for Abandoned Cart Messages:</label>
-                <select
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm mt-2'
-                  value={formData.preferred_channel}
-                  onChange={(e) => handleChange("preferred_channel", e.target.value)}
-                >
-                  <option value="email">Email</option>
-                  <option value="sms">SMS</option>
-                  <option value="whatsapp">WhatsApp</option>
-                </select>
               </div>
-            </>
-          )}
+            ))}
+
+            <div className='mb-6'>
+              <label className='text-sm font-medium text-gray-700'>Preferred Channel for Abandoned Cart Messages:</label>
+              <select
+                className='w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm sm:text-sm mt-2'
+                value={formData.preferred_channel}
+                onChange={(e) => handleChange("preferred_channel", e.target.value)}
+              >
+                <option value="email">Email</option>
+                <option value="sms">SMS</option>
+                <option value="whatsapp">WhatsApp</option>
+              </select>
+            </div>
+          </div>
 
           <div className="flex gap-4 mt-4">
             <button

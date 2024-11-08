@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import InputField from "../../Layout/InputField";
 import { useNavigate } from "react-router-dom";
+import apiClient from '../../interceptor/AuthInterceptor';
 
 const BirthdayCampaign = () => {
 
@@ -11,12 +12,15 @@ const BirthdayCampaign = () => {
         try {
             const query = new URLSearchParams(location.search);
             const id = query.get('id');
-            const url = `/aiSkill/getData/${id}`;
-            const response = await apiClient.get(url);
-            if (response.status === 200) {
-                let templete = response.data;
-                console.log(templete);
-                setFormData(templete.template_data)
+            if(id && id !== 'undefined') {
+                const url = `/aiSkill/getData/${id}`;
+                const response = await apiClient.get(url);
+                if (response.status === 200) {
+                    let templete = response.data;
+                    console.log("*************");
+                    console.log(templete.template_data);
+                    setFormData(templete.template_data || {})
+                }
             }
         } catch (error) {
             console.error(error);
@@ -29,40 +33,39 @@ const BirthdayCampaign = () => {
 
 
     const installBirthdayCampaign = async () => {
-        console.log(formData);
-        // try {
-        //     // Ensure the necessary fields are set before submitting
-        //     const submissionData = {
-        //         ...formData,
-        //         is_birthday_campaign_required: "true",
-        //         chatbot_id: chatbotId,
-        //         is_active: true,
-        //     };
+        try {
+            // Ensure the necessary fields are set before submitting
+            const submissionData = {
+                ...formData,
+                is_birthday_campaign_required: "true",
+                user_id : localStorage.getItem('userId'),
+                is_active: true,
+            };
 
-        //     if (submissionData.campaign_purpose === "wish_only") {
-        //         submissionData.birthday_campaign_gift = "wish only";
-        //         delete submissionData.birthday_campaign_purpose;
-        //     }
+            if (submissionData.campaign_purpose === "wish_only") {
+                submissionData.birthday_campaign_gift = "wish only";
+                delete submissionData.birthday_campaign_purpose;
+            }
 
-        //     if (submissionData.campaign_purpose === "discount") {
-        //         submissionData.birthday_campaign_purpose = `wish with ${submissionData.discount_percent}% discount using coupon ${submissionData.coupon_code}`;
-        //         delete submissionData.birthday_campaign_gift;
-        //     }
+            if (submissionData.campaign_purpose === "discount") {
+                submissionData.birthday_campaign_purpose = `wish with ${submissionData.discount_percent}% discount using coupon ${submissionData.coupon_code}`;
+                delete submissionData.birthday_campaign_gift;
+            }
 
-        //     console.log(submissionData);
-        //     const url = `/aiSkill/installBirthdaycampaign`;
-        //     const response = await apiClient.post(url, submissionData, {
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //     });
+            console.log(submissionData);
+            const url = `/aiSkill/installBirthdaycampaign`;
+            const response = await apiClient.post(url, submissionData, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
 
-        //     if (response.status === 201) {
-        //         console.log("Birthday campaign template added");
-        //     }
-        // } catch (error) {
-        //     console.error("Error:", error);
-        // }
+            if (response.status === 201) {
+                console.log("Birthday campaign template added");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
     const handleChange = (field, value) => {
@@ -219,7 +222,7 @@ const BirthdayCampaign = () => {
 
                     <button
                         className="py-2 px-8 bg-[#F1BD6C] text-white font-semibold rounded-lg hover:bg-[#e0a635] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-                        onClick={installBirthdayCampaign}
+                        onClick={() => installBirthdayCampaign()}
                     >
                         <span>Save</span>
                     </button>
