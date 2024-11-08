@@ -12,7 +12,7 @@ const Home = () => {
     {
       title: "Let’s get Started!.",
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+        "We build intelligent bots that simplify your workflow and enhance productivity. From automating tasks to optimizing processes, our solutions are designed to make your business smarter and more efficient. Discover how Automationz can drive your success forward!",
       videoSrc:
         "https://your-support.s3.eu-west-3.amazonaws.com/3d_getting_started_2.mp4",
     },
@@ -20,14 +20,14 @@ const Home = () => {
       title: "Scripts",
 
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+        "We build intelligent bots that simplify your workflow and enhance productivity. From automating tasks to optimizing processes, our solutions are designed to make your business smarter and more efficient. Discover how Automationz can drive your success forward!",
       videoSrc: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
     },
     {
       title: "Live Chat",
 
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
+        "We build intelligent bots that simplify your workflow and enhance productivity. From automating tasks to optimizing processes, our solutions are designed to make your business smarter and more efficient. Discover how Automationz can drive your success forward!",
       videoSrc: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
     },
   ];
@@ -86,7 +86,6 @@ const Home = () => {
 
   return (
     <div className="relative w-full h-full bg-gray-100 p-10">
-
       {/* <div className="relative w-full py-5">
         <img className="w-full h-full" src={ScriptImage} alt="Home Banner" />
         <div className="absolute inset-0 flex flex-col p-10 space-y-2 text-black ">
@@ -105,10 +104,11 @@ const Home = () => {
       {/* Card Section */}
       <div className="relative mt-10 rounded-xl bg-white flex flex-col space-y-2 w-[700px] h-[550px] p-6 mx-20">
         <h2
-          className={`text-4xl font-semibold ${currentSlide === 1 || currentSlide == 2
+          className={`text-4xl font-semibold ${
+            currentSlide === 1 || currentSlide == 2
               ? "text-black"
               : "text-[#F1BD6C]"
-            } `}
+          } `}
         >
           {slides[currentSlide].title}
         </h2>

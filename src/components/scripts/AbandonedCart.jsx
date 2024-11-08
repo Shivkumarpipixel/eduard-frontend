@@ -3,12 +3,7 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../interceptor/AuthInterceptor";
 // import { toast } from "react-toastify";
 
-const AbandonedCart = ({
-  chatbotId,
-  setActivePage,
-  templateData,
-  getAllInstalledTemplates,
-}) => {
+const AbandonedCart = () => {
   const [formData, setFormData] = useState({
     Abandon_Cart_Time_in_Hours: 0,
     Abandoned_Cart_Message1_Time: '',
@@ -37,14 +32,16 @@ const AbandonedCart = ({
 
   const installAbandonedCart = async () => {
     try {
+      // const user_id = localStorage.getItem('userId');
+      const user_id = 1;
       const url = `/aiSkill/installAbandonedCart`;
       console.log(url);
       formData.user_id = localStorage.getItem('userId');
       const response = await apiClient.post(url, {
         ...formData,
         Is_Abandoned_Cart_Required: "true",
+        user_id:user_id,
         is_active: true,
-        chatbot_id: chatbotId,
         Abandoned_Cart_Message1_Time_in_Minutes: convertDelayInMinutes(formData.Abandoned_Cart_Message1_Time_type, formData.Abandoned_Cart_Message1_Time),
         Abandoned_Cart_Message2_Time_in_Minutes: convertDelayInMinutes(formData.Abandoned_Cart_Message2_Time_type, formData.Abandoned_Cart_Message2_Time),
         Abandoned_Cart_Message3_Time_in_Minutes: convertDelayInMinutes(formData.Abandoned_Cart_Message3_Time_type, formData.Abandoned_Cart_Message3_Time),
@@ -53,7 +50,6 @@ const AbandonedCart = ({
           "Content-Type": "application/json",
         },
       });
-
       if (response.status === 201) {
         console.log("Abandoned template added");
         // toast.success("Data saved successfully");

@@ -9,8 +9,7 @@ import { useState } from "react";
 const Setting = () => {
   const navigate = useNavigate();
   const [teammates, setTeammates] = useState([]);
-  const userId = 1;
-
+  const userId = localStorage.getItem("userId");
   const setting = [
     {
       title: "Lorem Ipsum",
@@ -76,8 +75,12 @@ const Setting = () => {
                       className="w-28 h-28 rounded-lg mr-4 flex-shrink-0 bg-cover bg-center"
                       style={{ backgroundImage: `url(${BlueImage})` }}
                     >
-                    <img className="w-full h-full" src={teammate.profile_photo_path} alt="" />
-                  </div>
+                      <img
+                        className="w-full h-full"
+                        src={teammate.profile_photo_path}
+                        alt=""
+                      />
+                    </div>
                     <div className="flex-grow">
                       <div className="flex justify-between items-center mb-2">
                         <h3 className="text-lg font-semibold">

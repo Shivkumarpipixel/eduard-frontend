@@ -1,12 +1,40 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
+import apiClient from "../interceptor/AuthInterceptor"
 
 const Header = ({ siderBarFn }) => {
-  const profileImage = "https://via.placeholder.com/150";
-  const user = { name: "John Doe" };
-
+  // const profileImage = "https://via.placeholder.com/150";
+  const { user,updateUser } = useUser() || {};
+  
   const handleError = () => {};
-  const navigate =  useNavigate();;
+  const [profileImage, setProfileImage] = useState("https://via.placeholder.com/150");
+
+  const navigate = useNavigate();
+
+  const userId=localStorage.getItem("userId");
+
+
+  useEffect(() => {
+    const fetchTeammateData = async () => {
+      try {
+        const response = await apiClient.get(`/user/getById/${userId}`);
+        const UserData = response.data;
+        localStorage.setItem("workspace_id", response.data.workspace_id);
+        console.log(response.data);
+
+        if (UserData) {
+          updateUser(UserData)
+          // reset(UserData);
+          setProfileImage(UserData.profile_photo_path || defaultImage);
+        }
+      } catch (error) {
+        console.error("Error fetching teammate data:", error);
+      }
+    };
+    fetchTeammateData()
+  }, []);
+
 
   const handleLogout = () => {
     localStorage.clear();
@@ -61,7 +89,7 @@ const Header = ({ siderBarFn }) => {
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
-            <span className="text-gray-900">{user.name}</span>
+            {user?.name && <span className="text-gray-900">{user.name}</span>}
             <svg
               className={`w-[14px] h-[8px] transition-transform duration-200 ${
                 isOpen ? "rotate-180" : ""

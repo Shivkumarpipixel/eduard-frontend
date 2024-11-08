@@ -43,6 +43,7 @@ const Login = () => {
       if (response.status === 200) {
         localStorage.setItem("userId", response.data.user_id);
         localStorage.setItem("access_token", response.data.access_token);
+        localStorage.setItem("userEmail", data.email);
         setIsLoggedIn(true);
         console.log("User logged in successfully", response.data);
       }

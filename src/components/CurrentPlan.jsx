@@ -2,7 +2,7 @@ import React from "react";
 import billingIcon from "../assets/billing-card-icon.svg";
 import { LinearProgress } from "@mui/material";
 
-const CurrentPlan = ({setActiveTab}) => {
+const CurrentPlan = ({ setActiveTab }) => {
   return (
     <div>
       <div>
@@ -12,7 +12,10 @@ const CurrentPlan = ({setActiveTab}) => {
             <button className="border border-black rounded-lg px-4 py-2">
               Cancel Subscription
             </button>
-            <button className="border border-black rounded-lg  px-4 py-2" onClick={() =>setActiveTab('allPlan')}>
+            <button
+              className="border border-black rounded-lg  px-4 py-2"
+              onClick={() => setActiveTab("allPlan")}
+            >
               Change Plan
             </button>
           </div>
@@ -53,7 +56,7 @@ const CurrentPlan = ({setActiveTab}) => {
             <div className="bg-[#F7F7F5] rounded-xl w-full p-8">
               <img src={billingIcon} alt="" />
               <p className="font-semibold text-gray-500 text-sm mt-3">
-                Lorem ipsum
+                Total Messages{" "}
               </p>
               <p className="text-2xl font-semibold flex items-end my-3">
                 100 of 2000
@@ -73,7 +76,7 @@ const CurrentPlan = ({setActiveTab}) => {
             <div className="bg-[#F7F7F5] rounded-xl w-full p-8">
               <img src={billingIcon} alt="" />
               <p className="font-semibold text-gray-500 text-sm mt-3">
-                Lorem ipsum
+                Used Messages
               </p>
               <p className="text-2xl font-semibold flex items-end my-3">
                 100 of 2000
@@ -93,7 +96,7 @@ const CurrentPlan = ({setActiveTab}) => {
             <div className="bg-[#F7F7F5] rounded-xl w-full p-8">
               <img src={billingIcon} alt="" />
               <p className="font-semibold text-gray-500 text-sm mt-3">
-                Lorem ipsum
+                Total skillset
               </p>
               <p className="text-2xl font-semibold flex items-end my-3">
                 100 of 2000

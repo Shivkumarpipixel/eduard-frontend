@@ -18,7 +18,7 @@ const AllPlans = () => {
         <div className="bg-[#F7F7F5] py-14 px-10 rounded-2xl w-full shadow-md shadow-[#F7F7F5]">
           <div>
             <p className="text-2xl font-semibold">Basic Plan</p>
-            <p>Lorem ispsum simple dummy text</p>
+            <p>For end-to-end marketing for fast-growing companies.</p>
             <p className="flex text-2xl font-semibold items-end my-4">
               $ 50 <p className="text-base text-gray-500">/month</p>
             </p>
@@ -26,19 +26,17 @@ const AllPlans = () => {
             <ul className="space-y-3">
               <li className="flex gap-2">
                 <img src={checkbox} alt="" />
-                Lorem Ipsum
+                1000 Messages
+              </li>
+              <li className="flex gap-2">
+                <img src={checkbox} alt="" />1 Member
               </li>
               <li className="flex gap-2">
                 <img src={checkbox} alt="" />
-                Lorem Ipsum
+                All Channels
               </li>
               <li className="flex gap-2">
-                <img src={checkbox} alt="" />
-                Lorem Ipsum
-              </li>
-              <li className="flex gap-2">
-                <img src={checkbox} alt="" />
-                Lorem Ipsum
+                <img src={checkbox} alt="" />1 AI Employee
               </li>
             </ul>
 
@@ -51,7 +49,7 @@ const AllPlans = () => {
         <div className="bg-[#F7F7F5] py-14 px-10 rounded-2xl shadow-md shadow-[#F1BD6C] w-full border-2 border-[#F1BD6C]">
           <div>
             <p className="text-2xl font-semibold">Basic Plan</p>
-            <p>Lorem ispsum simple dummy text</p>
+            <p>For end-to-end marketing for fast-growing companies.</p>
             <p className="flex text-2xl font-semibold items-end my-4">
               $ 50 <p className="text-base text-gray-500">/month</p>
             </p>
@@ -59,19 +57,17 @@ const AllPlans = () => {
             <ul className="space-y-3">
               <li className="flex gap-2">
                 <img src={checkbox} alt="" />
-                Lorem Ipsum
+                5000 Messages
+              </li>
+              <li className="flex gap-2">
+                <img src={checkbox} alt="" />3 Member
               </li>
               <li className="flex gap-2">
                 <img src={checkbox} alt="" />
-                Lorem Ipsum
+                All Channels
               </li>
               <li className="flex gap-2">
-                <img src={checkbox} alt="" />
-                Lorem Ipsum
-              </li>
-              <li className="flex gap-2">
-                <img src={checkbox} alt="" />
-                Lorem Ipsum
+                <img src={checkbox} alt="" />1 AI Employee
               </li>
             </ul>
 
@@ -84,7 +80,7 @@ const AllPlans = () => {
         <div className="bg-[#F7F7F5] py-14 px-10 rounded-2xl w-full shadow-md shadow-[#F7F7F5]">
           <div>
             <p className="text-2xl font-semibold">Basic Plan</p>
-            <p>Lorem ispsum simple dummy text</p>
+            <p>For end-to-end marketing for fast-growing companies.</p>
             <p className="flex text-2xl font-semibold items-end my-4">
               $ 50 <p className="text-base text-gray-500">/month</p>
             </p>
@@ -92,19 +88,17 @@ const AllPlans = () => {
             <ul className="space-y-3">
               <li className="flex gap-2">
                 <img src={checkbox} alt="" />
-                Lorem Ipsum
+                12500 Messages
+              </li>
+              <li className="flex gap-2">
+                <img src={checkbox} alt="" />5 Member
               </li>
               <li className="flex gap-2">
                 <img src={checkbox} alt="" />
-                Lorem Ipsum
+                All Channels
               </li>
               <li className="flex gap-2">
-                <img src={checkbox} alt="" />
-                Lorem Ipsum
-              </li>
-              <li className="flex gap-2">
-                <img src={checkbox} alt="" />
-                Lorem Ipsum
+                <img src={checkbox} alt="" />5 Skillset
               </li>
             </ul>
 
