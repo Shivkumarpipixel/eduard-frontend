@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../interceptor/AuthInterceptor";
 // import { toast } from "react-toastify";
 
-const AbandonedCart = () => {
+const AbandonedCart = ({
+  chatbotId,
+  setActivePage,
+  templateData,
+  getAllInstalledTemplates,
+}) => {
   const [formData, setFormData] = useState({
     Abandon_Cart_Time_in_Hours: 0,
     Abandoned_Cart_Message1_Time: '',

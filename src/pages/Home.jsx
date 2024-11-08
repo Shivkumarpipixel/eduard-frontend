@@ -3,6 +3,7 @@ import HomeBanner from "../assets/BannerImage.svg";
 import { useTheme } from "@mui/material/styles";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -57,7 +58,7 @@ const Home = () => {
       // Retrieve user_id from the cookie
       let user_id = localStorage.getItem("userId");
       // Make POST request to /dashboard/sso API
-      const response = await fetch(`${api_url}/auth/sso`, {
+      const response = await fetch(`${apiUrl}/auth/sso`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
