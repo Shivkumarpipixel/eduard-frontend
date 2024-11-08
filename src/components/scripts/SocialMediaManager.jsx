@@ -3,11 +3,15 @@ import InputField from "../../Layout/InputField";
 import Modal from '@mui/material/Modal';
 import { useNavigate } from "react-router-dom";
 import apiClient from '../../interceptor/AuthInterceptor';
+import { useToast } from "../../context/ToastProvider";
+
 
 const SocialMediaManager = () => {
 
     const navigate = useNavigate();
     const [formData, setFormData] = useState({});
+    const showToast = useToast();
+
 
     const installSocialMedia = async () => {
         console.log(formData);
@@ -25,9 +29,13 @@ const SocialMediaManager = () => {
 
             if (response.status === 201) {
                 console.log("Social media templete added");
+                showToast("Data  saved successfully!", "success");
+
             }
         } catch (error) {
             console.error("Error:", error);
+            showToast("An error occurred while saving the profile.", "error");
+
         }
     };
 

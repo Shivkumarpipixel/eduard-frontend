@@ -127,7 +127,7 @@ const ProfilePage = () => {
       setTimeout(() => navigate("/setting"), 1500);
     } catch (error) {
       console.error("Error:", error);
-      alert("An error occurred while saving the profile.");
+      showToast("An error occurred while saving the profile.", "error");
     }
   };
 
@@ -196,8 +196,8 @@ const ProfilePage = () => {
                 </label>
                 <div className="-mb-6 w-full">
                   <InputField
-                    name={field.name} 
-                    register={register(field.name, { required: true })} 
+                    name={field.name}
+                    register={register(field.name, { required: true })}
                     placeholder={field.placeholder}
                     type={field.type}
                   />

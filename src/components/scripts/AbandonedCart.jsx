@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../interceptor/AuthInterceptor";
-// import { toast } from "react-toastify";
+import { useToast } from "../../context/ToastProvider";
 
 const AbandonedCart = ({
   chatbotId,
@@ -24,6 +24,8 @@ const AbandonedCart = ({
 
   const [isAbandonedCartRequired, setIsAbandonedCartRequired] = useState(false);
   const navigate = useNavigate();
+  const showToast = useToast();
+
 
   const handleChange = (field, value) => {
     if (field === "Abandon_Cart_Time_in_Hours" && (value < 0 || value > 90)) {
@@ -57,12 +59,14 @@ const AbandonedCart = ({
       });
       if (response.status === 201) {
         console.log("Abandoned template added");
-        // toast.success("Data saved successfully");
+        showToast("Data  saved successfully!", "success");
+
         getAllInstalledTemplates();
       }
     } catch (error) {
       console.error("Error:", error);
-      //   toast.error("Error saving data");
+      showToast("An error occurred while saving the profile.", "error");
+
     }
   };
 

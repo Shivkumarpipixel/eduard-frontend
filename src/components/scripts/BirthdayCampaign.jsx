@@ -2,11 +2,16 @@ import { useEffect, useState } from 'react';
 import InputField from "../../Layout/InputField";
 import { useNavigate } from "react-router-dom";
 import apiClient from '../../interceptor/AuthInterceptor';
+import { useToast } from "../../context/ToastProvider";
+
 
 const BirthdayCampaign = () => {
 
     const navigate = useNavigate();
     const [formData, setFormData] = useState({});
+
+    const showToast = useToast();
+
 
     const getTemplateById = async () => {
         try {
@@ -62,9 +67,13 @@ const BirthdayCampaign = () => {
 
             if (response.status === 201) {
                 console.log("Birthday campaign template added");
+                showToast("Data  saved successfully!", "success");
+
             }
         } catch (error) {
             console.error("Error:", error);
+            showToast("An error occurred while saving the profile.", "error");
+
         }
     };
 
