@@ -1,36 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Loader from "../../components/common/Loader";
-
 
 const channelUrl = import.meta.env.VITE_CHANNEL_URL;
 
 const Facebook = () => {
   const [loading, setLoading] = useState(true);
   const workspaceId = localStorage.getItem("workspace_id");
+  const iframeRef = useRef(null);
+
   const iframeStyle = {
     width: "100%",
     height: "100%",
     border: "none",
+    display: loading ? "none" : "block",
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-gray-100">
       <Loader loading={loading} />
-      {!loading && (
-        <div className="w-full h-full">
-          <iframe
-            src={`https://${channelUrl}/${workspaceId}#/facebook`}
-            title="Facebook"
-            style={iframeStyle}
-          />
-        </div>
-      )}
+      <iframe
+        ref={iframeRef}
+        src={`https://${channelUrl}/${workspaceId}#/facebook`}
+        title="Facebook"
+        style={iframeStyle}
+      />
     </div>
   );
 };
