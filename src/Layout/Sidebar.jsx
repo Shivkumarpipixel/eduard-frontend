@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/AutomationzLogo.png";
+import logo from "../assets/logo/logo_with_text.svg";
 
 const allMenuList = [
   {

@@ -1,11 +1,22 @@
 import React from "react";
 import billingIcon from "../assets/billing-card-icon.svg";
 import { LinearProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const CurrentPlan = ({ setActiveTab }) => {
+
+  const navigate  = useNavigate();
+
   return (
-    <div>
-      <div>
+    <div className="common_page_container_outer">
+      <div className="common_page_container_inner overflow-y-auto">
+        <h2 className="flex text-3xl font-semibold text-gray-800 mb-2 text-center">
+          Plan & Billing
+        </h2>
+        <p className="flex text-md text-gray-500 mb-6 text-center">
+          Manage your plan and payments.
+        </p>
+
         <div className="flex justify-between my-10">
           <h5 className="text-xl font-semibold text-gray-800">Current plan</h5>
           <div className="flex gap-4">
@@ -14,7 +25,7 @@ const CurrentPlan = ({ setActiveTab }) => {
             </button>
             <button
               className="border border-black rounded-lg  px-4 py-2"
-              onClick={() => setActiveTab("allPlan")}
+              onClick={() => navigate('/setting/all-plans')}
             >
               Change Plan
             </button>

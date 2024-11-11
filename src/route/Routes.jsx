@@ -20,6 +20,8 @@ import SettingProfile from "../Layout/SettingProfile";
 import Facebook from "../components/channels/Facebook";
 import Instagram from "../components/channels/Instagram";
 import Whatsapp from "../components/channels/WhatsApp";
+import AllPlans from "../components/AllPlans";
+import CurrentPlan from "../components/CurrentPlan";
 
 export const routes = [
   {
@@ -165,7 +167,15 @@ export const routes = [
   },
   {
     path: "/setting/plan-billing",
-    element: Billing,
+    element: CurrentPlan,
+    isPrivate: true,
+    exact: true,
+    isView: true,
+    // roles: ["all"],
+  },
+  {
+    path: "/setting/all-plans",
+    element: AllPlans,
     isPrivate: true,
     exact: true,
     isView: true,
